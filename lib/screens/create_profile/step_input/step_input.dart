@@ -3,18 +3,18 @@ import 'package:tiledmedia/data/profile.model.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
 
-class StepOutput extends StatefulWidget {
-  StepOutput({Key key, this.profile, this.onNext, this.onPrev}) : super(key: key);
+class StepInput extends StatefulWidget {
+  StepInput({Key key, this.profile, this.onNext, this.onPrev}) : super(key: key);
 
   final Profile profile;
   final VoidCallback onNext;
   final VoidCallback onPrev;
 
   @override
-  _StepOutputState createState() => new _StepOutputState(profile, onNext, onPrev);
+  _StepInputState createState() => new _StepInputState(profile, onNext, onPrev);
 }
 
-class _StepOutputState extends State<StepOutput> {
+class _StepInputState extends State<StepInput> {
   final nameCtrl = TextEditingController();
   final formKey = GlobalKey<FormState>();
   VoidCallback onNext;
@@ -23,7 +23,7 @@ class _StepOutputState extends State<StepOutput> {
   String dstLoc;
   Profile profile;
 
-  _StepOutputState(profile, onNext, onPrev) {
+  _StepInputState(profile, onNext, onPrev) {
     this.profile = profile;
     this.onNext = onNext;
     this.onPrev = onPrev;
@@ -52,7 +52,7 @@ class _StepOutputState extends State<StepOutput> {
               },
               keyboardType: TextInputType.text,
               decoration: InputDecoration(labelText: 'Output HTTP URL'),
-              onSaved: (val) => setState(() => profile.outputURL = val),
+              onSaved: (val) => setState(() => {}),
             ),
             Container(
               margin: EdgeInsets.only(top: AppStyles.dGap),

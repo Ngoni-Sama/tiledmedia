@@ -16,26 +16,32 @@ class AppBarLayout extends AppBar {
                     Navigator.of(context).pop();
                   })
               : null,
+          automaticallyImplyLeading: false,
           actions: <Widget>[
             new IconButton(
-                icon: new Icon(Icons.format_list_bulleted, color: Colors.white),
-                onPressed: () {
-                  Navigator.of(context).pushNamed('profiles');
-                }),
+              icon: new Icon(Icons.format_list_bulleted, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).pushNamed('profiles');
+              },
+              tooltip: 'Profiles',
+            ),
             new IconButton(
-                icon: new Icon(Icons.laptop_mac, color: Colors.white),
-                onPressed: () {
-                  Navigator.of(context).pushNamed('manage');
-                }),
+              icon: new Icon(Icons.laptop_mac, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).pushNamed('manage');
+              },
+              tooltip: 'Encode',
+            ),
             new IconButton(
-                icon: new Icon(Icons.settings, color: Colors.white),
-                onPressed: () {
-                  return showDialog(
-                    context: context,
-                    builder: (context) => SettingDialog(),
-                  );
-                },
-                tooltip: 'Settings'),
+              icon: new Icon(Icons.settings, color: Colors.white),
+              onPressed: () {
+                return showDialog(
+                  context: context,
+                  builder: (context) => SettingDialog(),
+                );
+              },
+              tooltip: 'Settings',
+            ),
           ],
         );
 }

@@ -21,14 +21,18 @@ class _StepProfileState extends State<StepProfile> {
   final formKey = GlobalKey<FormState>();
   VoidCallback onNext;
   VoidCallback onPrev;
-  String srcLoc;
-  String dstLoc;
   Profile profile;
+  String inProjectionType;
+  String outProjectionType;
+  String encodeQuality;
 
-  _StepProfileState(profile, onNext, onPrev) {
+  _StepProfileState(Profile profile, onNext, onPrev) {
     this.profile = profile;
     this.onNext = onNext;
     this.onPrev = onPrev;
+    this.inProjectionType = profile.inProjectionType;
+    this.outProjectionType = profile.outProjectionType;
+    this.encodeQuality = profile.encodeQuality;
   }
 
   _onSubmit() {
@@ -42,8 +46,8 @@ class _StepProfileState extends State<StepProfile> {
   @override
   Widget build(BuildContext context) {
     return new Container(
+      width: double.infinity,
       child: Form(
-        autovalidate: true,
         key: formKey,
         child: Column(
           children: <Widget>[
@@ -54,62 +58,139 @@ class _StepProfileState extends State<StepProfile> {
                 }
                 return null;
               },
+              initialValue: profile.name,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(labelText: 'Profile name'),
               onSaved: (val) => setState(() => profile.name = val),
             ),
             TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
-                  return null;
-                }
-                String p = "[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+";
-                RegExp regExp = new RegExp(p);
-                if (!regExp.hasMatch(value)) {
-                  return 'This field requires a valid email address';
-                }
-                return null;
-              },
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(labelText: 'Notification email address'),
-              onSaved: (val) => setState(() => profile.email = val),
-            ),
-            TextFormField(
+              initialValue: profile.remark,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(labelText: 'Remarks about profile'),
               onSaved: (val) => setState(() => profile.remark = val),
             ),
-            DropdownButtonFormField(
-              items: Globals.contentSourceLocations.entries.map((itm) {
-                return new DropdownMenuItem(
-                  value: itm.key,
-                  child: new Text(itm.value),
-                );
-              }).toList(),
-              value: srcLoc,
-              onChanged: (val) {
-                setState(() {
-                  srcLoc = val;
-                });
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Version cannot be empty';
+                }
+                if (!isNumeric(value)) {
+                  return 'Version must be numeric';
+                }
+                return null;
               },
-              decoration: InputDecoration(labelText: 'Select content source location'),
-              onSaved: (val) => setState(() => profile.sourceLocation = val),
+              initialValue: profile.version.toString(),
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(labelText: 'Version number'),
+              onSaved: (val) => setState(() => profile.version = int.parse(val)),
+            ),
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Width cannot be empty';
+                }
+                if (!isNumeric(value)) {
+                  return 'Width must be numeric';
+                }
+                return null;
+              },
+              initialValue: profile.width.toString(),
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(labelText: 'Source video width'),
+              onSaved: (val) => setState(() => profile.width = int.parse(val)),
+            ),
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Height cannot be empty';
+                }
+                if (!isNumeric(value)) {
+                  return 'Height must be numeric';
+                }
+                return null;
+              },
+              initialValue: profile.height.toString(),
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(labelText: 'Source video height'),
+              onSaved: (val) => setState(() => profile.height = int.parse(val)),
+            ),
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Framerate cannot be empty';
+                }
+                if (!isNumeric(value)) {
+                  return 'Framerate must be numeric';
+                }
+                return null;
+              },
+              initialValue: profile.frameRateNumber.toString(),
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(labelText: 'Numerator of Framerate'),
+              onSaved: (val) => setState(() => profile.frameRateNumber = int.parse(val)),
+            ),
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Framerate cannot be empty';
+                }
+                if (!isNumeric(value)) {
+                  return 'Framerate must be numeric';
+                }
+                return null;
+              },
+              initialValue: profile.frameRateDenom.toString(),
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(labelText: 'Denominator of Framerate'),
+              onSaved: (val) => setState(() => profile.frameRateDenom = int.parse(val)),
             ),
             DropdownButtonFormField(
-              items: Globals.contentDestinationLocations.entries.map((itm) {
+              items: Globals.inProjectionType.entries.map((itm) {
                 return new DropdownMenuItem(
                   value: itm.key,
                   child: new Text(itm.value),
                 );
               }).toList(),
-              value: dstLoc,
+              value: inProjectionType,
               onChanged: (val) {
                 setState(() {
-                  dstLoc = val;
+                  inProjectionType = val;
                 });
               },
-              decoration: InputDecoration(labelText: 'Select content destination location'),
-              onSaved: (val) => setState(() => profile.destLocation = val),
+              decoration: InputDecoration(labelText: 'Input video projection type'),
+              onSaved: (val) => setState(() => profile.inProjectionType = val),
+            ),
+            DropdownButtonFormField(
+              items: Globals.outProjectionType.entries.map((itm) {
+                return new DropdownMenuItem(
+                  value: itm.key,
+                  child: new Text(itm.value),
+                );
+              }).toList(),
+              value: outProjectionType,
+              onChanged: (val) {
+                setState(() {
+                  outProjectionType = val;
+                });
+              },
+              decoration: InputDecoration(labelText: 'Output video projection type'),
+              onSaved: (val) => setState(() => profile.outProjectionType = val),
+            ),
+            DropdownButtonFormField(
+              items: Globals.encodeQuality.entries.map((itm) {
+                return new DropdownMenuItem(
+                  value: itm.key,
+                  child: new Text(itm.value),
+                );
+              }).toList(),
+              value: encodeQuality,
+              onChanged: (val) {
+                setState(() {
+                  encodeQuality = val;
+                });
+              },
+              decoration: InputDecoration(labelText: 'Encode quality'),
+              onSaved: (val) => setState(() => profile.encodeQuality = val),
             ),
             Container(
               margin: EdgeInsets.only(top: AppStyles.dGap),
