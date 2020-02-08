@@ -61,31 +61,6 @@ class _StepProfileState extends State<StepProfile> {
             TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Customer ID cannot be empty';
-                }
-                if (!isNumeric(value)) {
-                  return 'Customer ID must be numeric';
-                }
-                return null;
-              },
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Enter your customer ID'),
-              onSaved: (val) => setState(() => profile.customerId = int.parse(val)),
-            ),
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'API auth key cannot be empty';
-                }
-                return null;
-              },
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(labelText: 'API authorization key'),
-              onSaved: (val) => setState(() => profile.apiAuthKey = val),
-            ),
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
                   return null;
                 }
                 String p = "[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+";

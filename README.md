@@ -1,6 +1,6 @@
 # tiledmedia
 
-A new Flutter application.
+Tiledmedia encode configuration application.
 
 ## Getting Started
 

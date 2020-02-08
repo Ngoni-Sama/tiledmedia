@@ -14,7 +14,7 @@ class _ProfilesState extends State<Profiles> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBarLayout(appBarTitle: 'Tiledmedia Profiles', context: context),
+      appBar: new AppBarLayout(appBarTitle: 'Tiledmedia Profiles', context: context, canGoBack: false,),
       body: new Container(
         child: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
           return GestureDetector(
@@ -34,7 +34,7 @@ class _ProfilesState extends State<Profiles> {
                         alignment: Alignment.centerRight,
                         child: PrimaryButton(
                           onPressed: () {
-                            Navigator.of(context).pushReplacementNamed('create-profile');
+                            Navigator.of(context).pushNamed('create-profile');
                           },
                           buttonName: 'Add',
                         ),

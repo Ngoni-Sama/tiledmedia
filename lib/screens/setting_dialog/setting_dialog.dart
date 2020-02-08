@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tiledmedia/util/common.dart';
 import 'package:tiledmedia/util/globals.dart';
+import 'package:tiledmedia/util/theme.dart';
+import 'package:tiledmedia/widgets/default_button/index.dart';
 import 'package:tiledmedia/widgets/primary_button/index.dart';
 
 class SettingDialog extends StatefulWidget {
@@ -29,7 +32,9 @@ class _SettingDialogState extends State<SettingDialog> {
         key: formKey,
         child: Container(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              Text('Input your secret info provided by TiledMedia', style: TextStyle(color: AppColors.defaultColor)),
               TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -59,6 +64,9 @@ class _SettingDialogState extends State<SettingDialog> {
                   if (value.isEmpty) {
                     return 'Customer ID cannot be empty';
                   }
+                  if (!isNumeric(value)) {
+                    return 'Customer ID must be numeric';
+                  }
                   return null;
                 },
                 initialValue: Globals.customerID,
@@ -72,7 +80,13 @@ class _SettingDialogState extends State<SettingDialog> {
       ),
       actions: <Widget>[
         PrimaryButton(buttonName: 'Save', onPressed: onSubmit),
-        FlatButton(child: Text('Cancel'), onPressed: () => Navigator.of(context).pop()),
+        Padding(
+          padding: EdgeInsets.only(right: 8),
+          child: DefaultButton(
+            buttonName: 'Cancel',
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
       ],
     );
   }

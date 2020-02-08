@@ -17,7 +17,7 @@ class Routes {
       title: 'ClearVR Cloud Encoding and Packaging',
       theme: appTheme(),
       routes: routes,
-      home: new Home(),
+      home: new Profiles(),
     ));
   }
 }

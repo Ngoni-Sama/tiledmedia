@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 ThemeData appTheme() {
   return ThemeData(
-    primaryColor: AppColors.primary,
-    cursorColor: AppColors.primary,
-    accentColor: AppColors.primary,
+    primaryColor: AppColors.primaryColor,
+    cursorColor: AppColors.primaryColor,
+    accentColor: AppColors.primaryColor,
   );
 }
 
 class AppColors {
 
-  static const primary = Color(0xFFE32B65);
-
+  static const primaryColor = Color(0xFFF50057);
+  static const defaultColor = Color(0xFF757575);
 }
 
 class AppStyles {

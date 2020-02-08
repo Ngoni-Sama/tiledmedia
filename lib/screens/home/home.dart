@@ -5,7 +5,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBarLayout(appBarTitle: 'Tiledmedia', context: context, back: false),
+      appBar: new AppBarLayout(appBarTitle: 'Tiledmedia', context: context, canGoBack: false),
       body: new Container(
         child: new Center(
           child: new Column(

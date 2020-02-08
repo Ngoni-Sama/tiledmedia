@@ -18,5 +18,4 @@ class Globals {
   static String customerID = '';
   static String apiAuthToken = '';
   static String xAPIKey = '';
-
 }

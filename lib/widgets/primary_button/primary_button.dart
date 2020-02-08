@@ -17,7 +17,7 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return new RaisedButton(
       child: new Text(buttonName, textDirection: TextDirection.ltr, style: buttonTextStyle),
-      color: AppColors.primary,
+      color: AppColors.primaryColor,
       onPressed: onPressed,
     );
   }

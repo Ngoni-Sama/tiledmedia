@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/util/theme.dart';
 
-class PrimaryButton extends StatelessWidget {
+class DefaultButton extends StatelessWidget {
   final VoidCallback onPressed;
   final TextStyle buttonTextStyle;
   final String buttonName;
 
   //passing props in react style
-  PrimaryButton({
+  DefaultButton({
     this.buttonName,
     this.onPressed,
     this.buttonTextStyle = AppStyles.defaultTextStyle,
@@ -17,7 +17,7 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return new RaisedButton(
       child: new Text(buttonName, textDirection: TextDirection.ltr, style: buttonTextStyle),
-      color: AppColors.primary,
+      color: AppColors.defaultColor,
       onPressed: onPressed,
     );
   }

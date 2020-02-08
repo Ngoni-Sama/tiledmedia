@@ -4,28 +4,28 @@ import 'package:tiledmedia/screens/setting_dialog/setting_dialog.dart';
 class AppBarLayout extends AppBar {
   final String appBarTitle;
   final BuildContext context;
-  final bool back;
+  final bool canGoBack;
 
-  AppBarLayout({this.appBarTitle, this.context, this.back = true})
+  AppBarLayout({this.appBarTitle, this.context, this.canGoBack = true})
       : super(
           title: new Text(appBarTitle),
-          leading: back
+          leading: canGoBack
               ? IconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.white),
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed('home');
+                    Navigator.of(context).pop();
                   })
               : null,
           actions: <Widget>[
             new IconButton(
                 icon: new Icon(Icons.format_list_bulleted, color: Colors.white),
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed('profiles');
+                  Navigator.of(context).pushNamed('profiles');
                 }),
             new IconButton(
                 icon: new Icon(Icons.laptop_mac, color: Colors.white),
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed('manage');
+                  Navigator.of(context).pushNamed('manage');
                 }),
             new IconButton(
                 icon: new Icon(Icons.settings, color: Colors.white),
