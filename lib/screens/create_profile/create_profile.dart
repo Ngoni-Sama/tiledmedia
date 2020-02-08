@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tiledmedia/data/profile.model.dart';
+import 'package:tiledmedia/screens/create_profile/step_complete/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_output/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_input/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_profile/index.dart';
@@ -53,7 +54,16 @@ class _CreateProfileState extends State<CreateProfile> {
         state: _getState(2),
         isActive: true,
       ),
-      Step(title: const Text('Finish'), content: const Text('This is Content3'), state: _getState(3), isActive: true),
+      Step(
+        title: const Text('Complete'),
+        content: new StepComplete(
+          profile: profile,
+          onNext: _moveNext,
+          onPrev: _movePrev,
+        ),
+        state: _getState(3),
+        isActive: true,
+      ),
     ];
     return spr;
   }

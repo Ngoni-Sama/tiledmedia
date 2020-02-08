@@ -17,6 +17,10 @@ class Profile {
   Map srcCredentials;
   String destLocType;
   Map destCredentials;
+  String url;
+  String notificationType;
+  String webhook;
+  String mail;
 
   Profile() {
     // Profile details
@@ -53,7 +57,7 @@ class Profile {
     this.destLocType = 's3bucket';
     this.destCredentials = {
       's3bucket': {
-        'region': '',
+        'region': 'us-east-2',
         'custom_endpoint': '',
         'bucket': '',
         'access_key_id': '',
@@ -69,7 +73,7 @@ class Profile {
         'token': '',
         'path': '',
       },
-      'akamai_ns': {
+      'akamai-ns': {
         'host': '',
         'keyname': '',
         'key': '',
@@ -77,6 +81,10 @@ class Profile {
         'path': '',
       }
     };
+    this.url = '';
+    this.notificationType = 'mail';
+    this.webhook = '';
+    this.mail = '';
   }
 
   Map get requestProfileBody {

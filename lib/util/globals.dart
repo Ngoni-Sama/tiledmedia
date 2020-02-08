@@ -50,9 +50,14 @@ class Globals {
   static final Map<String, String> destLocType = {
     's3bucket': 'S3 Bucket',
     'azure-blob': 'Azure Blob',
-    'akamai-ns': 'Akamai-ns',
+    'akamai-ns': 'Akamai NS',
     'wangsu': 'Wangsu',
     'http-put': 'Put to Http'
+  };
+
+  static final Map<String, String> notificationType = {
+    'webhook': 'Webhook',
+    'mail': 'Mail'
   };
 
   static final Map<String, String> s3Regions = {

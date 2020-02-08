@@ -76,7 +76,7 @@ class _StepInputState extends State<StepInput> {
             initialValue: profile.srcCredentials['s3bucket']['access_key_id'],
             keyboardType: TextInputType.text,
             decoration: InputDecoration(labelText: 'Access key ID'),
-            onSaved: (val) => setState(() => profile.srcCredentials['s3bucket']['access_key_id'] = val),
+            onSaved: (val) => profile.srcCredentials['s3bucket']['access_key_id'] = val,
           ),
           TextFormField(
             validator: (value) {
@@ -88,7 +88,7 @@ class _StepInputState extends State<StepInput> {
             initialValue: profile.srcCredentials['s3bucket']['secret_access_key'],
             keyboardType: TextInputType.text,
             decoration: InputDecoration(labelText: 'Secret Access key'),
-            onSaved: (val) => setState(() => profile.srcCredentials['s3bucket']['secret_access_key'] = val),
+            onSaved: (val) => profile.srcCredentials['s3bucket']['secret_access_key'] = val,
           ),
           TextFormField(
             validator: (value) {
@@ -100,7 +100,7 @@ class _StepInputState extends State<StepInput> {
             initialValue: profile.srcCredentials['s3bucket']['bucket'],
             keyboardType: TextInputType.text,
             decoration: InputDecoration(labelText: 'Bucket name'),
-            onSaved: (val) => setState(() => profile.srcCredentials['s3bucket']['bucket'] = val),
+            onSaved: (val) => profile.srcCredentials['s3bucket']['bucket'] = val,
           ),
           TextFormField(
             validator: (value) {
@@ -113,9 +113,9 @@ class _StepInputState extends State<StepInput> {
               return null;
             },
             initialValue: profile.srcCredentials['s3bucket']['custom_endpoint'],
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.url,
             decoration: InputDecoration(labelText: 'Custom S3 bucket location e.g. https://s3.eu-west-1.amazonaws.com/mybucket'),
-            onSaved: (val) => setState(() => profile.srcCredentials['s3bucket']['custom_endpoint'] = val),
+            onSaved: (val) => profile.srcCredentials['s3bucket']['custom_endpoint'] = val,
           ),
         ],
       ),
@@ -140,7 +140,7 @@ class _StepInputState extends State<StepInput> {
             initialValue: profile.srcCredentials['azure-blob']['account_key'],
             keyboardType: TextInputType.text,
             decoration: InputDecoration(labelText: 'Account name'),
-            onSaved: (val) => setState(() => profile.srcCredentials['azure-blob']['account_key'] = val),
+            onSaved: (val) => profile.srcCredentials['azure-blob']['account_key'] = val,
           ),
           TextFormField(
             validator: (value) {
@@ -152,7 +152,7 @@ class _StepInputState extends State<StepInput> {
             initialValue: profile.srcCredentials['azure-blob']['access_key_id'],
             keyboardType: TextInputType.text,
             decoration: InputDecoration(labelText: 'Account key'),
-            onSaved: (val) => setState(() => profile.srcCredentials['azure-blob']['access_key_id'] = val),
+            onSaved: (val) => profile.srcCredentials['azure-blob']['access_key_id'] = val,
           ),
           TextFormField(
             validator: (value) {
@@ -165,9 +165,9 @@ class _StepInputState extends State<StepInput> {
               return null;
             },
             initialValue: profile.srcCredentials['azure-blob']['container'],
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.url,
             decoration: InputDecoration(labelText: 'Container e.g. https://my.blob.core.windows.net/mycontainer'),
-            onSaved: (val) => setState(() => profile.srcCredentials['azure-blob']['container'] = val),
+            onSaved: (val) => profile.srcCredentials['azure-blob']['container'] = val,
           ),
         ],
       ),
@@ -219,11 +219,11 @@ class _StepInputState extends State<StepInput> {
               value: srcLoc,
               onChanged: (val) => _changedType(val),
               decoration: InputDecoration(labelText: 'Source video location type'),
-              onSaved: (val) => setState(() => profile.srcLocType = val),
+              onSaved: (val) => profile.srcLocType = val,
             ),
             printForm(),
             Container(
-              margin: EdgeInsets.only(top: AppStyles.dGap),
+              margin: EdgeInsets.only(top: AppStyles.gap_16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[

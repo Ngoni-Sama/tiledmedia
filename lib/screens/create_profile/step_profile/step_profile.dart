@@ -80,7 +80,7 @@ class _StepProfileState extends State<StepProfile> {
                 return null;
               },
               initialValue: profile.version.toString(),
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Version number'),
               onSaved: (val) => setState(() => profile.version = int.parse(val)),
             ),
@@ -95,7 +95,7 @@ class _StepProfileState extends State<StepProfile> {
                 return null;
               },
               initialValue: profile.width.toString(),
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Source video width'),
               onSaved: (val) => setState(() => profile.width = int.parse(val)),
             ),
@@ -110,7 +110,7 @@ class _StepProfileState extends State<StepProfile> {
                 return null;
               },
               initialValue: profile.height.toString(),
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Source video height'),
               onSaved: (val) => setState(() => profile.height = int.parse(val)),
             ),
@@ -125,7 +125,7 @@ class _StepProfileState extends State<StepProfile> {
                 return null;
               },
               initialValue: profile.frameRateNumber.toString(),
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Numerator of Framerate'),
               onSaved: (val) => setState(() => profile.frameRateNumber = int.parse(val)),
             ),
@@ -140,7 +140,7 @@ class _StepProfileState extends State<StepProfile> {
                 return null;
               },
               initialValue: profile.frameRateDenom.toString(),
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Denominator of Framerate'),
               onSaved: (val) => setState(() => profile.frameRateDenom = int.parse(val)),
             ),
@@ -193,7 +193,7 @@ class _StepProfileState extends State<StepProfile> {
               onSaved: (val) => setState(() => profile.encodeQuality = val),
             ),
             Container(
-              margin: EdgeInsets.only(top: AppStyles.dGap),
+              margin: EdgeInsets.only(top: AppStyles.gap_16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[

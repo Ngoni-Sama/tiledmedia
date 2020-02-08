@@ -18,5 +18,5 @@ class AppStyles {
 
   static const defaultTextStyle = TextStyle(color: Color(0xffffffff));
 
-  static const double dGap = 16;
+  static const double gap_16 = 16;
 }
