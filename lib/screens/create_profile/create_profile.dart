@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tiledmedia/data/profile.model.dart';
@@ -5,6 +7,8 @@ import 'package:tiledmedia/screens/create_profile/step_complete/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_output/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_input/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_profile/index.dart';
+import 'package:tiledmedia/util/database.dart';
+import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/widgets/appbar_layout/appbar_layout.dart';
 
 class CreateProfile extends StatefulWidget {
@@ -18,9 +22,37 @@ class CreateProfile extends StatefulWidget {
 class _CreateProfileState extends State<CreateProfile> {
   int current = 0;
   List<Step> spr = <Step>[];
-  final profile = new Profile();
+  Profile profile;
+
+  init() {
+    final LinkedHashMap<String, int> args = ModalRoute.of(context).settings.arguments;
+
+    if (args == null) {
+      setState(() {
+        profile = new Profile();
+      });
+    } else {
+      getProfileByIndex(args['id']).then((value) =>
+          setState(() {
+            if (value == null) {
+              setState(() {
+                profile = new Profile();
+              });
+              Globals.profileFormMode = -1;
+            } else {
+              setState(() {
+                profile = value;
+              });
+              Globals.profileFormMode = args['id'];
+            }
+          }));
+    }
+  }
 
   List<Step> _getSteps(BuildContext context) {
+    if (profile == null) {
+      return [];
+    }
     spr = <Step>[
       Step(
         title: const Text('Profile'),
@@ -96,6 +128,9 @@ class _CreateProfileState extends State<CreateProfile> {
 
   @override
   Widget build(BuildContext context) {
+    if (profile == null) {
+      init();
+    }
     return new Scaffold(
       appBar: new AppBarLayout(appBarTitle: 'Create Profile', context: context),
       body: new Container(

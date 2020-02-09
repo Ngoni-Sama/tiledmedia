@@ -26,7 +26,7 @@ class AppBarLayout extends AppBar {
               tooltip: 'Profiles',
             ),
             new IconButton(
-              icon: new Icon(Icons.laptop_mac, color: Colors.white),
+              icon: new Icon(Icons.developer_mode, color: Colors.white),
               onPressed: () {
                 Navigator.of(context).pushNamed('encode');
               },

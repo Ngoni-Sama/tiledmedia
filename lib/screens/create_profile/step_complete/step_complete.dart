@@ -33,19 +33,29 @@ class _StepCompleteState extends State<StepComplete> {
     this.notificationType = profile.notificationType;
   }
 
-  _onSave() {
+  _onCreate() {
     if (formKey.currentState.validate()) {
       final form = formKey.currentState;
       form.save();
-      saveProfile(profile);
+      createProfile(profile);
       Navigator.of(context).pushNamed('profiles');
     }
   }
 
-  _onSaveAndEncode() {
+  _onSave() {
     if (formKey.currentState.validate()) {
       final form = formKey.currentState;
       form.save();
+      updateProfile(Globals.profileFormMode, profile);
+      Navigator.of(context).pushNamed('profiles');
+    }
+  }
+
+  _onCreateAndEncode() {
+    if (formKey.currentState.validate()) {
+      final form = formKey.currentState;
+      form.save();
+      createProfile(profile);
       Navigator.of(context).pushNamed('encode');
     }
   }
@@ -108,16 +118,26 @@ class _StepCompleteState extends State<StepComplete> {
                 children: <Widget>[
                   new PrimaryButton(
                     onPressed: onPrev,
-                    buttonName: 'Prev',
+                    buttonName: 'Back',
                   ),
-                  new PrimaryButton(
-                    onPressed: _onSave,
-                    buttonName: 'Save',
-                  ),
-                  new PrimaryButton(
-                    onPressed: _onSaveAndEncode,
-                    buttonName: 'Save & Encode',
-                  ),
+                  Globals.profileFormMode == -1
+                      ? new PrimaryButton(
+                          onPressed: _onCreate,
+                          buttonName: 'Create',
+                        )
+                      : new PrimaryButton(
+                          onPressed: _onSave,
+                          buttonName: 'Save',
+                        ),
+                  Globals.profileFormMode == -1
+                      ? new PrimaryButton(
+                          onPressed: _onCreateAndEncode,
+                          buttonName: 'Create & Encode',
+                        )
+                      : new PrimaryButton(
+                          onPressed: _onCreate,
+                          buttonName: 'Create as New',
+                        ),
                 ],
               ),
             )

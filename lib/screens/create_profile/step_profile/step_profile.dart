@@ -199,7 +199,7 @@ class _StepProfileState extends State<StepProfile> {
                 children: <Widget>[
                   new PrimaryButton(
                     onPressed: onPrev,
-                    buttonName: 'Prev',
+                    buttonName: 'Back',
                   ),
                   new PrimaryButton(
                     onPressed: _onSubmit,

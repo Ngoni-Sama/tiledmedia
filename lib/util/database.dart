@@ -22,7 +22,7 @@ Future<List<Profile>> getAllProfiles() async {
   return result;
 }
 
-saveProfile(Profile profile) async {
+createProfile(Profile profile) async {
   List<String> profiles = Globals.pref.getStringList('profiles');
 
   if (profiles == null) {
@@ -32,6 +32,22 @@ saveProfile(Profile profile) async {
   Map prof = profile.toJson();
   String profileStr = json.encode(prof);
   profiles.add(profileStr);
+
+  await Globals.pref.setStringList('profiles', profiles);
+}
+
+updateProfile(int id, Profile profile) async {
+  List<String> profiles = Globals.pref.getStringList('profiles');
+
+  if (profiles == null) {
+    profiles = [];
+  }
+
+  profiles.removeAt(id);
+
+  Map prof = profile.toJson();
+  String profileStr = json.encode(prof);
+  profiles.insert(id, profileStr);
 
   await Globals.pref.setStringList('profiles', profiles);
 }
@@ -47,4 +63,14 @@ deleteProfile(int id) async {
   profiles.removeAt(id);
 
   await Globals.pref.setStringList('profiles', profiles);
+}
+
+getProfileByIndex(int id) async {
+  List<Profile> profiles = await getAllProfiles();
+
+  if (profiles.length == 0) {
+    return null;
+  } else {
+    return profiles[id];
+  }
 }

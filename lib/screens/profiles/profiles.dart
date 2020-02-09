@@ -50,8 +50,8 @@ class _ProfilesState extends State<Profiles> {
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(top: 8, bottom: 8),
             child: MaterialButton(
-              color: AppColors.defaultColor,
-              textColor: Colors.white,
+              color: Colors.white,
+              textColor: AppColors.primaryColor,
               child: Icon(Icons.delete, size: 24),
               padding: EdgeInsets.all(12),
               shape: CircleBorder(),
@@ -68,7 +68,9 @@ class _ProfilesState extends State<Profiles> {
               padding: EdgeInsets.all(12),
               shape: CircleBorder(),
               onPressed: () {
-                Navigator.of(context).pushNamed('create-profile');
+                Navigator.of(context).pushNamed('create-profile', arguments: <String, int>{
+                  'id': id,
+                });
               },
             ),
           ),
