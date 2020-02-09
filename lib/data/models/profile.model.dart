@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:tiledmedia/util/globals.dart';
 
 class Profile {
@@ -127,5 +129,23 @@ class Profile {
       'webhook': webhook,
       'mail': mail,
     };
+  }
+
+  String getProfileRequestJson() {
+    final body = {
+      "customer_id": Globals.customerID,
+      "api_auth_token": Globals.apiAuthToken,
+      "version": version,
+      "width": width,
+      "height": height,
+      "framerate": {
+        "num": frameRateNumber,
+        "denom": frameRateDenom
+      },
+      "in_projection_type": inProjectionType,
+      "out_projection_type": outProjectionType,
+      "encode_quality": encodeQuality
+    };
+    return json.encode(body);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tiledmedia/data/profile.model.dart';
+import 'package:tiledmedia/data/models/profile.model.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
@@ -32,7 +32,7 @@ class _StepInputState extends State<StepInput> {
     this.s3Region = this.profile.srcCredentials['s3bucket']['region'];
   }
 
-  _onSubmit() {
+  onSubmit() {
     if (formKey.currentState.validate()) {
       final form = formKey.currentState;
       form.save();
@@ -40,7 +40,7 @@ class _StepInputState extends State<StepInput> {
     }
   }
 
-  _changedType(type) {
+  changedType(type) {
     setState(() {
       this.srcLoc = type;
     });
@@ -217,7 +217,7 @@ class _StepInputState extends State<StepInput> {
                 );
               }).toList(),
               value: srcLoc,
-              onChanged: (val) => _changedType(val),
+              onChanged: (val) => changedType(val),
               decoration: InputDecoration(labelText: 'Source video location type'),
               onSaved: (val) => profile.srcLocType = val,
             ),
@@ -232,7 +232,7 @@ class _StepInputState extends State<StepInput> {
                     buttonName: 'Back',
                   ),
                   new PrimaryButton(
-                    onPressed: _onSubmit,
+                    onPressed: onSubmit,
                     buttonName: 'Next',
                   ),
                 ],

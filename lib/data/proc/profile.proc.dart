@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tiledmedia/data/profile.model.dart';
+import 'package:tiledmedia/data/models/profile.model.dart';
 import 'package:tiledmedia/util/common.dart';
 import 'package:tiledmedia/util/globals.dart';
 

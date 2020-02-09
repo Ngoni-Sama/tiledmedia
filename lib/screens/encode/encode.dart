@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tiledmedia/data/profile.model.dart';
+import 'package:tiledmedia/data/models/profile.model.dart';
 import 'package:tiledmedia/screens/encode/step_choose/index.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';

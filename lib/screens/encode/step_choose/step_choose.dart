@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tiledmedia/data/models/profile.model.dart';
+import 'package:tiledmedia/data/proc/profile.proc.dart';
+import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
 
@@ -18,17 +21,44 @@ class _StepChooseState extends State<StepChoose> {
   VoidCallback onNext;
   VoidCallback onPrev;
 
+  List<Profile> profiles = [];
+  Profile recommended = null;
+
   _StepChooseState(onNext, onPrev) {
     this.onNext = onNext;
     this.onPrev = onPrev;
   }
 
-  _onSubmit() {
+  @override
+  void initState() {
+    super.initState();
+    getAllProfiles().then((value) => setState(() => profiles = value));
+  }
+
+  onSubmit() {
     if (formKey.currentState.validate()) {
       final form = formKey.currentState;
       form.save();
       onNext();
     }
+  }
+
+  changedType(type) {
+    int id = profiles.indexOf(type);
+    setState(() {
+      this.recommended = type;
+    });
+  }
+
+  List<DropdownMenuItem<String>> getProfiles() {
+    List<DropdownMenuItem> menus = [];
+    for (int i=0; i<profiles.length; i++) {
+      menus.add(DropdownMenuItem(
+        value: i,
+        child: new Text(profiles[i].name),
+      ));
+    }
+    return menus.map((e) => e as DropdownMenuItem<String>).toList();
   }
 
   @override
@@ -39,6 +69,18 @@ class _StepChooseState extends State<StepChoose> {
         key: formKey,
         child: Column(
           children: <Widget>[
+            DropdownButtonFormField(
+              items: profiles.map((itm) {
+                return new DropdownMenuItem(
+                  value: itm,
+                  child: new Text(itm.name),
+                );
+              }).toList(),
+              value: recommended,
+              onChanged: (val) => changedType(val),
+              decoration: InputDecoration(labelText: 'Source video location type'),
+              onSaved: (val) => val,
+            ),
             TextFormField(
               validator: (value) {
                 if (value.contains(' ')) {
@@ -61,7 +103,7 @@ class _StepChooseState extends State<StepChoose> {
                     buttonName: 'Back',
                   ),
                   new PrimaryButton(
-                    onPressed: _onSubmit,
+                    onPressed: onSubmit,
                     buttonName: 'Next',
                   ),
                 ],
