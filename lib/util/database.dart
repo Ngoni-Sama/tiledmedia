@@ -1,0 +1,50 @@
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tiledmedia/data/profile.model.dart';
+import 'package:tiledmedia/util/common.dart';
+import 'package:tiledmedia/util/globals.dart';
+
+Future<List<Profile>> getAllProfiles() async {
+  List<String> profiles;
+  if (Globals.pref == null) {
+    Globals.pref = await initPreferences();
+  }
+  profiles = Globals.pref.getStringList('profiles');
+
+  List<Profile> result = [];
+  for (int i=0; i<profiles.length; i++) {
+    Map tmp = json.decode(profiles[i]);
+    Profile p = Profile.fromJson(tmp);
+    result.add(p);
+  }
+
+  return result;
+}
+
+saveProfile(Profile profile) async {
+  List<String> profiles = Globals.pref.getStringList('profiles');
+
+  if (profiles == null) {
+    profiles = [];
+  }
+
+  Map prof = profile.toJson();
+  String profileStr = json.encode(prof);
+  profiles.add(profileStr);
+
+  await Globals.pref.setStringList('profiles', profiles);
+}
+
+deleteProfile(int id) async {
+  List<String> profiles = Globals.pref.getStringList('profiles');
+
+  if (profiles == null || profiles.length == 0) {
+    profiles = [];
+    return;
+  }
+
+  profiles.removeAt(id);
+
+  await Globals.pref.setStringList('profiles', profiles);
+}

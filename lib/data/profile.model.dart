@@ -1,7 +1,6 @@
 import 'package:tiledmedia/util/globals.dart';
 
 class Profile {
-
   String name;
   String remark;
   int version;
@@ -87,23 +86,46 @@ class Profile {
     this.mail = '';
   }
 
-  Map get requestProfileBody {
-    Map body = {
-      "customer_id": Globals.customerID,
-      "api_auth_token": Globals.apiAuthToken,
-      "version": this.version,
-      "width": this.width,
-      "height": this.height,
-      "framerate": {
-        "num": this.frameRateNumber,
-        "denom": this.frameRateDenom
-      },
-      "in_projection_type": this.inProjectionType,
-      "out_projection_type": this.outProjectionType,
-      "encode_quality": this.encodeQuality
+  Profile.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        remark = json['remark'],
+        version = json['version'],
+        width = json['width'],
+        height = json['height'],
+        frameRateNumber = json['frameRateNumber'],
+        frameRateDenom = json['frameRateDenom'],
+        inProjectionType = json['inProjectionType'],
+        outProjectionType = json['outProjectionType'],
+        encodeQuality = json['encodeQuality'],
+        srcLocType = json['srcLocType'],
+        srcCredentials = json['srcCredentials'],
+        destLocType = json['destLocType'],
+        destCredentials = json['destCredentials'],
+        url = json['url'],
+        notificationType = json['notificationType'],
+        webhook = json['webhook'],
+        mail = json['mail'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'remark': remark,
+      'version': version,
+      'width': width,
+      'height': height,
+      'frameRateNumber': frameRateNumber,
+      'frameRateDenom': frameRateDenom,
+      'inProjectionType': inProjectionType,
+      'outProjectionType': outProjectionType,
+      'encodeQuality': encodeQuality,
+      'srcLocType': srcLocType,
+      'srcCredentials': srcCredentials,
+      'destLocType': destLocType,
+      'destCredentials': destCredentials,
+      'url': url,
+      'notificationType': notificationType,
+      'webhook': webhook,
+      'mail': mail,
     };
-
-    return body;
   }
-
 }

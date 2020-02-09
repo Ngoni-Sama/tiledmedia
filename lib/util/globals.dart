@@ -1,4 +1,8 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Globals {
+
+  static SharedPreferences pref;
 
   static final Map<String, String> contentSourceLocations = {
     's3bucket': 's3bucket',

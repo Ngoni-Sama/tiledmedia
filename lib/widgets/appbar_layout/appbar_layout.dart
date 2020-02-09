@@ -28,7 +28,7 @@ class AppBarLayout extends AppBar {
             new IconButton(
               icon: new Icon(Icons.laptop_mac, color: Colors.white),
               onPressed: () {
-                Navigator.of(context).pushNamed('manage');
+                Navigator.of(context).pushNamed('encode');
               },
               tooltip: 'Encode',
             ),

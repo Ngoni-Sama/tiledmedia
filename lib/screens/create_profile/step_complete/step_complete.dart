@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/profile.model.dart';
 import 'package:tiledmedia/util/common.dart';
+import 'package:tiledmedia/util/database.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
@@ -36,6 +37,7 @@ class _StepCompleteState extends State<StepComplete> {
     if (formKey.currentState.validate()) {
       final form = formKey.currentState;
       form.save();
+      saveProfile(profile);
       Navigator.of(context).pushNamed('profiles');
     }
   }

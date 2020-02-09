@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tiledmedia/data/profile.model.dart';
+import 'package:tiledmedia/util/database.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/appbar_layout/appbar_layout.dart';
 import 'package:tiledmedia/widgets/primary_button/index.dart';
@@ -12,8 +14,82 @@ class Profiles extends StatefulWidget {
 }
 
 class _ProfilesState extends State<Profiles> {
+  List<Profile> profiles = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getAllProfiles().then((value) => setState(() => profiles = value));
+  }
+
+  Widget profileElement(String name, String remark, int id) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(24, 16, 24, 16),
+      decoration: BoxDecoration(
+        color: AppColors.secondaryColor,
+        boxShadow: [BoxShadow(color: Colors.blueGrey, blurRadius: 10)],
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(left: 16, top: 8),
+                  child: Text(name, style: TextStyle(color: Colors.white, fontSize: 24)),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 16, bottom: 8),
+                  child: Text(remark, style: TextStyle(color: AppColors.lightColor, fontSize: 16)),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.only(top: 8, bottom: 8),
+            child: MaterialButton(
+              color: AppColors.defaultColor,
+              textColor: Colors.white,
+              child: Icon(Icons.delete, size: 24),
+              padding: EdgeInsets.all(12),
+              shape: CircleBorder(),
+              onPressed: () => deleteItem(id),
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.only(top: 8, bottom: 8),
+            child: MaterialButton(
+              color: Colors.white,
+              textColor: AppColors.primaryColor,
+              child: Icon(Icons.edit, size: 24),
+              padding: EdgeInsets.all(12),
+              shape: CircleBorder(),
+              onPressed: () {
+                Navigator.of(context).pushNamed('create-profile');
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  deleteItem(int idx) {
+    deleteProfile(idx);
+    getAllProfiles().then((value) => setState(() => profiles = value));
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    List<Widget> profileWidgets = [];
+    for (int i=0; i<profiles.length; i++) {
+      profileWidgets.add(profileElement(profiles[i].name, profiles[i].remark, i));
+    }
+
     return new Scaffold(
       appBar: new AppBarLayout(
         appBarTitle: 'Tiledmedia Profiles',
@@ -27,8 +103,8 @@ class _ProfilesState extends State<Profiles> {
             child: Column(
               children: <Widget>[
                 Container(
-                  alignment: Alignment.centerRight,
-                  padding: EdgeInsets.only(top: 8),
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.only(top: 8, bottom: 8),
                   child: MaterialButton(
                     color: AppColors.primaryColor,
                     textColor: Colors.white,
@@ -51,9 +127,7 @@ class _ProfilesState extends State<Profiles> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Container(),
-                          ],
+                          children: profileWidgets,
                         ),
                       ),
                     ),

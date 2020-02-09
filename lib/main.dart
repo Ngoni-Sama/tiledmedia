@@ -1,5 +1,5 @@
 import 'routes.dart';
 
-void main () {
+void main() {
   new Routes();
 }
