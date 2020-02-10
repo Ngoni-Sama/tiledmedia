@@ -7,7 +7,7 @@ import 'package:tiledmedia/screens/create_profile/step_complete/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_output/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_input/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_profile/index.dart';
-import 'package:tiledmedia/data/proc/profile.proc.dart';
+import 'package:tiledmedia/data/repositories/profile.proc.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/widgets/appbar_layout/appbar_layout.dart';
 

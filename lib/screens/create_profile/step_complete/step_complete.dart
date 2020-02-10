@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/profile.model.dart';
 import 'package:tiledmedia/util/common.dart';
-import 'package:tiledmedia/data/proc/profile.proc.dart';
+import 'package:tiledmedia/data/repositories/profile.proc.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';

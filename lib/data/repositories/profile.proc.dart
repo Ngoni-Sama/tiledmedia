@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiledmedia/data/models/profile.model.dart';
 import 'package:tiledmedia/util/common.dart';
 import 'package:tiledmedia/util/globals.dart';
@@ -56,7 +55,6 @@ deleteProfile(int id) async {
   List<String> profiles = Globals.pref.getStringList('profiles');
 
   if (profiles == null || profiles.length == 0) {
-    profiles = [];
     return;
   }
 
