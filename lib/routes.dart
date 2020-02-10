@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiledmedia/data/models/setting.model.dart';
 import 'package:tiledmedia/screens/create_profile/index.dart';
 import 'package:tiledmedia/screens/encode/index.dart';
 import 'package:tiledmedia/screens/home/home.dart';
@@ -28,5 +29,6 @@ class Routes {
 
   init() async {
     Globals.pref = await initPreferences();
+    Globals.setting = Setting.getInstance();
   }
 }

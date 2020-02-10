@@ -1,8 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tiledmedia/data/models/setting.model.dart';
 
 class Globals {
 
   static SharedPreferences pref;
+  static Setting setting;
   static int profileFormMode = -1;    // -1: create, 0~: editing id
 
   static final Map<String, String> contentSourceLocations = {
@@ -86,8 +88,4 @@ class Globals {
     'me-south-1': 'Middle East (Bahrain)',
     'sa-east-1': 'South America (São Paulo)',
   };
-
-  static String customerID = '';
-  static String apiAuthToken = '';
-  static String xAPIKey = '';
 }

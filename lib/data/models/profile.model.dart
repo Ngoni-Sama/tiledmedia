@@ -114,16 +114,4 @@ class Profile {
       'mail': mail,
     };
   }
-
-  String getProfileRequestJson() {
-    final body = {
-      "customer_id": Globals.customerID,
-      "api_auth_token": Globals.apiAuthToken,
-      "version": version,
-      "in_projection_type": inProjectionType,
-      "out_projection_type": outProjectionType,
-      "encode_quality": encodeQuality
-    };
-    return json.encode(body);
-  }
 }

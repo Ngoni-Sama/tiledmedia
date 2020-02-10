@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiledmedia/data/models/setting.model.dart';
 import 'package:tiledmedia/util/common.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
@@ -15,11 +16,24 @@ class SettingDialog extends StatefulWidget {
 
 class _SettingDialogState extends State<SettingDialog> {
   final formKey = GlobalKey<FormState>();
+  String xAPIKey = '';
+  String apiAuthToken = '';
+  int customerID;
+  Setting setting;
+
+  @override
+  void initState() {
+    xAPIKey = Globals.setting.xAPIKey;
+    apiAuthToken = Globals.setting.apiAuthToken;
+    customerID = Globals.setting.customerID;
+    setting = Globals.setting;
+  }
 
   onSubmit() {
     if (formKey.currentState.validate()) {
       final form = formKey.currentState;
       form.save();
+      Globals.setting.saveSetting(customerID, apiAuthToken, xAPIKey);
       Navigator.of(context).pop();
     }
   }
@@ -42,10 +56,10 @@ class _SettingDialogState extends State<SettingDialog> {
                   }
                   return null;
                 },
-                initialValue: Globals.xAPIKey,
+                initialValue: setting.xAPIKey.toString(),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(labelText: 'X-API-KEY'),
-                onSaved: (val) => setState(() => Globals.xAPIKey = val),
+                onSaved: (val) => setState(() => xAPIKey = val),
               ),
               TextFormField(
                 validator: (value) {
@@ -54,10 +68,10 @@ class _SettingDialogState extends State<SettingDialog> {
                   }
                   return null;
                 },
-                initialValue: Globals.apiAuthToken,
+                initialValue: setting.apiAuthToken,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(labelText: 'API-AUTH-TOKEN'),
-                onSaved: (val) => setState(() => Globals.apiAuthToken = val),
+                onSaved: (val) => setState(() => apiAuthToken = val),
               ),
               TextFormField(
                 validator: (value) {
@@ -69,10 +83,10 @@ class _SettingDialogState extends State<SettingDialog> {
                   }
                   return null;
                 },
-                initialValue: Globals.customerID,
+                initialValue: setting.customerID.toString(),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(labelText: 'Customer ID'),
-                onSaved: (val) => setState(() => Globals.customerID = val),
+                onSaved: (val) => setState(() => customerID = int.tryParse(val)),
               ),
             ],
           ),
