@@ -6,10 +6,6 @@ class Profile {
   String name;
   String remark;
   int version;
-  int width;
-  int height;
-  int frameRateNumber;
-  int frameRateDenom;
   String inProjectionType;
   String outProjectionType;
   String encodeQuality;
@@ -28,10 +24,6 @@ class Profile {
     this.name = '';
     this.remark = '';
     this.version = 1;
-    this.width = 1920;
-    this.height = 1080;
-    this.frameRateNumber = 30000;
-    this.frameRateDenom = 1001;
     this.inProjectionType = '360-erp-mono';
     this.outProjectionType = '360-cubemap-mono';
     this.encodeQuality = 'default';
@@ -92,10 +84,6 @@ class Profile {
       : name = json['name'],
         remark = json['remark'],
         version = json['version'],
-        width = json['width'],
-        height = json['height'],
-        frameRateNumber = json['frameRateNumber'],
-        frameRateDenom = json['frameRateDenom'],
         inProjectionType = json['inProjectionType'],
         outProjectionType = json['outProjectionType'],
         encodeQuality = json['encodeQuality'],
@@ -113,10 +101,6 @@ class Profile {
       'name': name,
       'remark': remark,
       'version': version,
-      'width': width,
-      'height': height,
-      'frameRateNumber': frameRateNumber,
-      'frameRateDenom': frameRateDenom,
       'inProjectionType': inProjectionType,
       'outProjectionType': outProjectionType,
       'encodeQuality': encodeQuality,
@@ -136,12 +120,6 @@ class Profile {
       "customer_id": Globals.customerID,
       "api_auth_token": Globals.apiAuthToken,
       "version": version,
-      "width": width,
-      "height": height,
-      "framerate": {
-        "num": frameRateNumber,
-        "denom": frameRateDenom
-      },
       "in_projection_type": inProjectionType,
       "out_projection_type": outProjectionType,
       "encode_quality": encodeQuality

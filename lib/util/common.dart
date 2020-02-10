@@ -5,7 +5,7 @@ bool isNumeric(String s) {
   if(s == null) {
     return false;
   }
-  return double.parse(s) != null;
+  return double.tryParse(s) != null;
 }
 
 Future<SharedPreferences> initPreferences() async {

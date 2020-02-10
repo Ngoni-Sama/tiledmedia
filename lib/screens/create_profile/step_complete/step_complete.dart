@@ -66,6 +66,7 @@ class _StepCompleteState extends State<StepComplete> {
       width: double.infinity,
       child: Form(
         key: formKey,
+        autovalidate: true,
         child: Column(
           children: <Widget>[
             DropdownButtonFormField(

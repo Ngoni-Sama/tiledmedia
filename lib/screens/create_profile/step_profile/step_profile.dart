@@ -49,6 +49,7 @@ class _StepProfileState extends State<StepProfile> {
       width: double.infinity,
       child: Form(
         key: formKey,
+        autovalidate: true,
         child: Column(
           children: <Widget>[
             TextFormField(
@@ -83,66 +84,6 @@ class _StepProfileState extends State<StepProfile> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Version number'),
               onSaved: (val) => setState(() => profile.version = int.parse(val)),
-            ),
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Width cannot be empty';
-                }
-                if (!isNumeric(value)) {
-                  return 'Width must be numeric';
-                }
-                return null;
-              },
-              initialValue: profile.width.toString(),
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Source video width'),
-              onSaved: (val) => setState(() => profile.width = int.parse(val)),
-            ),
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Height cannot be empty';
-                }
-                if (!isNumeric(value)) {
-                  return 'Height must be numeric';
-                }
-                return null;
-              },
-              initialValue: profile.height.toString(),
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Source video height'),
-              onSaved: (val) => setState(() => profile.height = int.parse(val)),
-            ),
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Framerate cannot be empty';
-                }
-                if (!isNumeric(value)) {
-                  return 'Framerate must be numeric';
-                }
-                return null;
-              },
-              initialValue: profile.frameRateNumber.toString(),
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Numerator of Framerate'),
-              onSaved: (val) => setState(() => profile.frameRateNumber = int.parse(val)),
-            ),
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Framerate cannot be empty';
-                }
-                if (!isNumeric(value)) {
-                  return 'Framerate must be numeric';
-                }
-                return null;
-              },
-              initialValue: profile.frameRateDenom.toString(),
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Denominator of Framerate'),
-              onSaved: (val) => setState(() => profile.frameRateDenom = int.parse(val)),
             ),
             DropdownButtonFormField(
               items: Globals.inProjectionType.entries.map((itm) {
