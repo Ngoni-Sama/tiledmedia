@@ -15,7 +15,7 @@ class Setting {
   }
 
   isConfigured() {
-    return customerID != '' && apiAuthToken != '' && xAPIKey != null;
+    return customerID != null && apiAuthToken != '' && xAPIKey != '';
   }
 
   saveSetting(int customerID, String apiAuthToken, String xAPIKey) async {

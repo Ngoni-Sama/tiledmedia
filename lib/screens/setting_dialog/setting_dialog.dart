@@ -83,7 +83,7 @@ class _SettingDialogState extends State<SettingDialog> {
                   }
                   return null;
                 },
-                initialValue: setting.customerID.toString(),
+                initialValue: setting.customerID != null ? setting.customerID.toString() : '',
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(labelText: 'Customer ID'),
                 onSaved: (val) => setState(() => customerID = int.tryParse(val)),
