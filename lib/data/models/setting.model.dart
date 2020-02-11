@@ -1,21 +1,26 @@
+import 'dart:convert';
+
 import 'package:tiledmedia/util/globals.dart';
 
 class Setting {
-
   static Setting _setting;
   int customerID;
   String apiAuthToken = '';
   String xAPIKey = '';
 
-  static Setting getInstance() {
+  static Future<Setting> getInstance() async {
     if (_setting != null) {
       return _setting;
     }
 
+    String data = await Globals.jsonFile.readData();
+    Map jsonData = data == '' ? {} : json.decode(data) ;
+    Map setting = jsonData['setting'] ?? {};
+
     _setting = new Setting();
-    _setting.customerID = Globals.pref.getInt('customer_id');
-    _setting.apiAuthToken = Globals.pref.getString('api_auth_token') ?? '';
-    _setting.xAPIKey = Globals.pref.getString('x_api_key') ?? '';
+    _setting.customerID = setting['customerID'] ?? null;
+    _setting.apiAuthToken = setting['apiAuthToken'] ?? '';
+    _setting.xAPIKey = setting['xAPIKey'] ?? '';
     return _setting;
   }
 
@@ -23,12 +28,21 @@ class Setting {
     return customerID != null && apiAuthToken != '' && xAPIKey != '';
   }
 
-  saveSetting(int customerID, String apiAuthToken, String xAPIKey) {
+  saveSetting(int customerID, String apiAuthToken, String xAPIKey) async {
     this.customerID = customerID;
     this.apiAuthToken = apiAuthToken;
     this.xAPIKey = xAPIKey;
-    Globals.pref.setInt('customer_id ', customerID );
-    Globals.pref.setString('api_auth_token ', apiAuthToken );
-    Globals.pref.setString('x_api_key ', xAPIKey );
+
+    String data = await Globals.jsonFile.readData();
+    Map jsonData = data == '' ? {} : json.decode(data) ;
+    Map setting = jsonData['setting'] ?? {};
+
+    setting['customerID'] = customerID;
+    setting['apiAuthToken'] = apiAuthToken;
+    setting['xAPIKey'] = xAPIKey;
+
+    jsonData['setting'] = setting;
+
+    Globals.jsonFile.writeData(json.encode(jsonData));
   }
 }

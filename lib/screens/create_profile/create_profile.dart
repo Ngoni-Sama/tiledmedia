@@ -25,14 +25,13 @@ class _CreateProfileState extends State<CreateProfile> {
 
   init() {
     final LinkedHashMap<String, int> args = ModalRoute.of(context).settings.arguments;
-
     if (args == null) {
       setState(() {
         profile = new Profile();
       });
     } else {
-      Profile p = Profile.getProfileByIndex(args['id']);
-      setState(() {
+      Profile.getProfileByIndex(args['id']).then((pro) {
+        Profile p = pro;
         if (p == null) {
           setState(() {
             profile = new Profile();

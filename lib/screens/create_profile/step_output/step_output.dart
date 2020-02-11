@@ -224,7 +224,7 @@ class _StepOutputState extends State<StepOutput> {
               if (value.isEmpty) {
                 return 'Akamai cpcode cannot be empty';
               }
-              if (!isNumeric(value)) {
+              if (!Common.isNumeric(value)) {
                 return 'Akamai cpcode must be numeric';
               }
               if (value.length != 6) {

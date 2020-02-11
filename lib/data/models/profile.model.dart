@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:tiledmedia/util/common.dart';
 import 'package:tiledmedia/util/globals.dart';
 
 class Profile {
@@ -82,22 +80,22 @@ class Profile {
   }
 
 
-  static List<Profile> getAllProfiles() {
-    List<String> profiles;
-    profiles = Globals.pref.getStringList('profiles');
+  static Future<List<Profile>> getAllProfiles() async {
+    String data = await Globals.jsonFile.readData();
+    Map jsonData = data == '' ? {} : json.decode(data) ;
+    List profiles = jsonData['profiles'] ?? [];
 
     List<Profile> result = [];
     for (int i=0; i<profiles.length; i++) {
-      Map tmp = json.decode(profiles[i]);
-      Profile p = Profile.fromJson(tmp);
+      Profile p = Profile.fromJson(profiles[i]);
       result.add(p);
     }
 
     return result;
   }
 
-  static getProfileByIndex(int idx) {
-    List<Profile> profiles = getAllProfiles();
+  static getProfileByIndex(int idx) async {
+    List<Profile> profiles = await getAllProfiles();
 
     if (profiles.length == 0) {
       return null;
@@ -106,22 +104,26 @@ class Profile {
     }
   }
 
-  create() {
-    List<String> profiles = Globals.pref.getStringList('profiles');
+  create() async {
+    String data = await Globals.jsonFile.readData();
+    Map jsonData = data == '' ? {} : json.decode(data) ;
+    List profiles = jsonData['profiles'] ?? [];
 
     if (profiles == null) {
       profiles = [];
     }
 
     Map prof = this.toJson();
-    String profileStr = json.encode(prof);
-    profiles.add(profileStr);
+    profiles.add(prof);
+    jsonData['profiles'] = profiles;
 
-    Globals.pref.setStringList('profiles', profiles);
+    Globals.jsonFile.writeData(json.encode(jsonData));
   }
 
-  update(int id) {
-    List<String> profiles = Globals.pref.getStringList('profiles');
+  update(int id) async {
+    String data = await Globals.jsonFile.readData();
+    Map jsonData = data == '' ? {} : json.decode(data) ;
+    List profiles = jsonData['profiles'] ?? [];
 
     if (profiles == null) {
       profiles = [];
@@ -130,22 +132,25 @@ class Profile {
     profiles.removeAt(id);
 
     Map prof = this.toJson();
-    String profileStr = json.encode(prof);
-    profiles.insert(id, profileStr);
+    profiles.insert(id, prof);
+    jsonData['profiles'] = profiles;
 
-    Globals.pref.setStringList('profiles', profiles);
+    Globals.jsonFile.writeData(json.encode(jsonData));
   }
 
-  static deleteByIndex(int id) {
-    List<String> profiles = Globals.pref.getStringList('profiles');
+  static Future deleteByIndex(int id) async {
+    String data = await Globals.jsonFile.readData();
+    Map jsonData = data == '' ? {} : json.decode(data) ;
+    List profiles = jsonData['profiles'] ?? [];
 
     if (profiles == null || profiles.length == 0) {
       return;
     }
 
     profiles.removeAt(id);
+    jsonData['profiles'] = profiles;
 
-    Globals.pref.setStringList('profiles', profiles);
+    return Globals.jsonFile.writeData(json.encode(jsonData));
   }
 
   Profile.fromJson(Map<String, dynamic> json)

@@ -78,7 +78,7 @@ class _SettingDialogState extends State<SettingDialog> {
                   if (value.isEmpty) {
                     return 'Customer ID cannot be empty';
                   }
-                  if (!isNumeric(value)) {
+                  if (!Common.isNumeric(value)) {
                     return 'Customer ID must be numeric';
                   }
                   return null;

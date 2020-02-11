@@ -3,6 +3,7 @@ import 'package:tiledmedia/data/models/profile.model.dart';
 import 'package:tiledmedia/data/models/setting.model.dart';
 import 'package:tiledmedia/util/common.dart';
 import 'package:tiledmedia/util/globals.dart';
+import 'package:tiledmedia/util/json_file.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/appbar_layout/appbar_layout.dart';
 
@@ -20,11 +21,8 @@ class _ProfilesState extends State<Profiles> {
   @override
   void initState() {
     super.initState();
-    initPreferences().then((pref) {
-      Globals.pref = pref;
-      Globals.setting = Setting.getInstance();
-      setState(() => profiles = Profile.getAllProfiles());
-    });
+    Common.initializeApp();
+    Profile.getAllProfiles().then((val) => setState(() => profiles = val));
   }
 
   Widget profileElement(String name, String remark, int id) {
@@ -85,15 +83,15 @@ class _ProfilesState extends State<Profiles> {
   }
 
   deleteItem(int idx) {
-    Profile.deleteByIndex(idx);
-    setState(() => profiles = Profile.getAllProfiles());
+    Profile.deleteByIndex(idx).then((_) {
+      Profile.getAllProfiles().then((value) => setState(() => profiles = value));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-
     List<Widget> profileWidgets = [];
-    for (int i=0; i<profiles.length; i++) {
+    for (int i = 0; i < profiles.length; i++) {
       profileWidgets.add(profileElement(profiles[i].name, profiles[i].remark, i));
     }
 

@@ -75,7 +75,7 @@ class _StepProfileState extends State<StepProfile> {
                 if (value.isEmpty) {
                   return 'Version cannot be empty';
                 }
-                if (!isNumeric(value)) {
+                if (!Common.isNumeric(value)) {
                   return 'Version must be numeric';
                 }
                 return null;

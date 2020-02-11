@@ -30,8 +30,7 @@ class _StepChooseState extends State<StepChoose> {
   @override
   void initState() {
     super.initState();
-//    Profile.getAllProfiles().then((value) => setState(() => profiles = value));
-    setState(() => profiles = Profile.getAllProfiles());
+    Profile.getAllProfiles().then((value) => setState(() => profiles = value));
   }
 
   onSubmit() {
