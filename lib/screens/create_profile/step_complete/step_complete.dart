@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/profile.model.dart';
-import 'package:tiledmedia/util/common.dart';
-import 'package:tiledmedia/data/repositories/profile.proc.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
@@ -37,7 +35,7 @@ class _StepCompleteState extends State<StepComplete> {
     if (formKey.currentState.validate()) {
       final form = formKey.currentState;
       form.save();
-      createProfile(profile);
+      profile.create();
       Navigator.of(context).pushNamed('profiles');
     }
   }
@@ -46,7 +44,7 @@ class _StepCompleteState extends State<StepComplete> {
     if (formKey.currentState.validate()) {
       final form = formKey.currentState;
       form.save();
-      updateProfile(Globals.profileFormMode, profile);
+      profile.update(Globals.profileFormMode);
       Navigator.of(context).pushNamed('profiles');
     }
   }
@@ -55,7 +53,7 @@ class _StepCompleteState extends State<StepComplete> {
     if (formKey.currentState.validate()) {
       final form = formKey.currentState;
       form.save();
-      createProfile(profile);
+      profile.create();
       Navigator.of(context).pushNamed('encode');
     }
   }

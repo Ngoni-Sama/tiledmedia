@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:tiledmedia/util/common.dart';
 import 'package:tiledmedia/util/globals.dart';
 
 class Profile {
@@ -78,6 +79,73 @@ class Profile {
     this.notificationType = 'mail';
     this.webhook = '';
     this.mail = '';
+  }
+
+
+  static List<Profile> getAllProfiles() {
+    List<String> profiles;
+    profiles = Globals.pref.getStringList('profiles');
+
+    List<Profile> result = [];
+    for (int i=0; i<profiles.length; i++) {
+      Map tmp = json.decode(profiles[i]);
+      Profile p = Profile.fromJson(tmp);
+      result.add(p);
+    }
+
+    return result;
+  }
+
+  static getProfileByIndex(int idx) {
+    List<Profile> profiles = getAllProfiles();
+
+    if (profiles.length == 0) {
+      return null;
+    } else {
+      return profiles[idx];
+    }
+  }
+
+  create() {
+    List<String> profiles = Globals.pref.getStringList('profiles');
+
+    if (profiles == null) {
+      profiles = [];
+    }
+
+    Map prof = this.toJson();
+    String profileStr = json.encode(prof);
+    profiles.add(profileStr);
+
+    Globals.pref.setStringList('profiles', profiles);
+  }
+
+  update(int id) {
+    List<String> profiles = Globals.pref.getStringList('profiles');
+
+    if (profiles == null) {
+      profiles = [];
+    }
+
+    profiles.removeAt(id);
+
+    Map prof = this.toJson();
+    String profileStr = json.encode(prof);
+    profiles.insert(id, profileStr);
+
+    Globals.pref.setStringList('profiles', profiles);
+  }
+
+  static deleteByIndex(int id) {
+    List<String> profiles = Globals.pref.getStringList('profiles');
+
+    if (profiles == null || profiles.length == 0) {
+      return;
+    }
+
+    profiles.removeAt(id);
+
+    Globals.pref.setStringList('profiles', profiles);
   }
 
   Profile.fromJson(Map<String, dynamic> json)

@@ -7,7 +7,6 @@ import 'package:tiledmedia/screens/create_profile/step_complete/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_output/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_input/index.dart';
 import 'package:tiledmedia/screens/create_profile/step_profile/index.dart';
-import 'package:tiledmedia/data/repositories/profile.proc.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/widgets/appbar_layout/appbar_layout.dart';
 
@@ -32,20 +31,20 @@ class _CreateProfileState extends State<CreateProfile> {
         profile = new Profile();
       });
     } else {
-      getProfileByIndex(args['id']).then((value) =>
+      Profile p = Profile.getProfileByIndex(args['id']);
+      setState(() {
+        if (p == null) {
           setState(() {
-            if (value == null) {
-              setState(() {
-                profile = new Profile();
-              });
-              Globals.profileFormMode = -1;
-            } else {
-              setState(() {
-                profile = value;
-              });
-              Globals.profileFormMode = args['id'];
-            }
-          }));
+            profile = new Profile();
+          });
+          Globals.profileFormMode = -1;
+        } else {
+          setState(() {
+            profile = p;
+          });
+          Globals.profileFormMode = args['id'];
+        }
+      });
     }
   }
 

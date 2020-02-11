@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/profile.model.dart';
-import 'package:tiledmedia/data/repositories/profile.proc.dart';
-import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
 
@@ -32,7 +30,8 @@ class _StepChooseState extends State<StepChoose> {
   @override
   void initState() {
     super.initState();
-    getAllProfiles().then((value) => setState(() => profiles = value));
+//    Profile.getAllProfiles().then((value) => setState(() => profiles = value));
+    setState(() => profiles = Profile.getAllProfiles());
   }
 
   onSubmit() {

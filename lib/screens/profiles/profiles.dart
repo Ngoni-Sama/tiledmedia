@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/profile.model.dart';
-import 'package:tiledmedia/data/repositories/profile.proc.dart';
+import 'package:tiledmedia/data/models/setting.model.dart';
+import 'package:tiledmedia/util/common.dart';
+import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/appbar_layout/appbar_layout.dart';
-import 'package:tiledmedia/widgets/primary_button/index.dart';
 
 class Profiles extends StatefulWidget {
   Profiles({Key key, this.title}) : super(key: key);
@@ -19,7 +20,11 @@ class _ProfilesState extends State<Profiles> {
   @override
   void initState() {
     super.initState();
-    getAllProfiles().then((value) => setState(() => profiles = value));
+    initPreferences().then((pref) {
+      Globals.pref = pref;
+      Globals.setting = Setting.getInstance();
+      setState(() => profiles = Profile.getAllProfiles());
+    });
   }
 
   Widget profileElement(String name, String remark, int id) {
@@ -80,8 +85,8 @@ class _ProfilesState extends State<Profiles> {
   }
 
   deleteItem(int idx) {
-    deleteProfile(idx);
-    getAllProfiles().then((value) => setState(() => profiles = value));
+    Profile.deleteByIndex(idx);
+    setState(() => profiles = Profile.getAllProfiles());
   }
 
   @override
