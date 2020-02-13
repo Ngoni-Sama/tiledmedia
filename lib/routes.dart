@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/screens/create_profile/index.dart';
-import 'package:tiledmedia/screens/encode/index.dart';
+import 'package:tiledmedia/screens/schedule/index.dart';
 import 'package:tiledmedia/screens/home/home.dart';
 import 'package:tiledmedia/screens/profiles/index.dart';
 import 'package:tiledmedia/util/theme.dart';
@@ -10,7 +10,7 @@ class Routes {
     'home': (BuildContext context) => new Home(),
     'profiles': (BuildContext context) => new Profiles(),
     'create-profile': (BuildContext context) => new CreateProfile(),
-    'encode': (BuildContext context) => new Encode(),
+    'schedule-encode': (BuildContext context) => new Schedule(),
   };
 
   Routes () {

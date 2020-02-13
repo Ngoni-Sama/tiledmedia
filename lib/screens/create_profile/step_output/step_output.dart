@@ -352,6 +352,7 @@ class _StepOutputState extends State<StepOutput> {
         return httpForm();
         break;
     }
+    return Container();
   }
 
   @override

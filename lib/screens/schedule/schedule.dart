@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:tiledmedia/data/models/profile.model.dart';
-import 'package:tiledmedia/screens/encode/step_choose/index.dart';
-import 'package:tiledmedia/util/globals.dart';
-import 'package:tiledmedia/util/theme.dart';
+import 'package:tiledmedia/data/models/encode.model.dart';
+import 'package:tiledmedia/screens/schedule/step_choose/index.dart';
 import 'package:tiledmedia/widgets/appbar_layout/index.dart';
-import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
 
-class Encode extends StatefulWidget {
-  Encode({Key key}) : super(key: key);
+class Schedule extends StatefulWidget {
+  Schedule({Key key}) : super(key: key);
 
   @override
-  _EncodeState createState() => new _EncodeState();
+  _ScheduleState createState() => new _ScheduleState();
 }
 
-class _EncodeState extends State<Encode> {
+class _ScheduleState extends State<Schedule> {
   int current = 0;
   List<Step> spr = <Step>[];
+  Encode encode;
 
   List<Step> _getSteps(BuildContext context) {
     spr = <Step>[
       Step(
         title: const Text('Choose Profile'),
         content: new StepChoose(
+          encode: encode,
           onNext: _moveNext,
           onPrev: _movePrev,
         ),
@@ -29,8 +28,9 @@ class _EncodeState extends State<Encode> {
         isActive: true,
       ),
       Step(
-        title: const Text('Encode Schedule'),
+        title: const Text('Schedule Encode'),
         content: new StepChoose(
+          encode: encode,
           onNext: _moveNext,
           onPrev: _movePrev,
         ),
@@ -69,11 +69,11 @@ class _EncodeState extends State<Encode> {
 
   @override
   Widget build(BuildContext context) {
+    if (encode == null) {
+      encode = new Encode();
+    }
     return new Scaffold(
-      appBar: new AppBarLayout(
-        appBarTitle: 'Encode Video',
-        context: context,
-      ),
+      appBar: new AppBarLayout(appBarTitle: 'Schedule Video', context: context),
       body: new Container(
         child: new Stepper(
           steps: _getSteps(context),

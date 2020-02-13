@@ -16,7 +16,6 @@ class StepComplete extends StatefulWidget {
 }
 
 class _StepCompleteState extends State<StepComplete> {
-  final nameCtrl = TextEditingController();
   final formKey = GlobalKey<FormState>();
   VoidCallback onNext;
   VoidCallback onPrev;
@@ -54,7 +53,7 @@ class _StepCompleteState extends State<StepComplete> {
       final form = formKey.currentState;
       form.save();
       profile.create();
-      Navigator.of(context).pushNamed('encode');
+      Navigator.of(context).pushNamed('schedule-encode');
     }
   }
 

@@ -17,7 +17,6 @@ class StepProfile extends StatefulWidget {
 }
 
 class _StepProfileState extends State<StepProfile> {
-  final nameCtrl = TextEditingController();
   final formKey = GlobalKey<FormState>();
   VoidCallback onNext;
   VoidCallback onPrev;

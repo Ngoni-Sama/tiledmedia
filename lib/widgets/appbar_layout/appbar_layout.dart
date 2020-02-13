@@ -64,7 +64,7 @@ class AppBarLayout extends AppBar {
                     ),
                   );
                 } else {
-                  Navigator.of(context).pushNamed('encode');
+                  Navigator.of(context).pushNamed('schedule-encode');
                 }
               },
               tooltip: 'Encode',

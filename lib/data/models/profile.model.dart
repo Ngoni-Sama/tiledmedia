@@ -94,7 +94,7 @@ class Profile {
     return result;
   }
 
-  static getProfileByIndex(int idx) async {
+  static Future<Profile> getProfileByIndex(int idx) async {
     List<Profile> profiles = await getAllProfiles();
 
     if (profiles.length == 0) {
