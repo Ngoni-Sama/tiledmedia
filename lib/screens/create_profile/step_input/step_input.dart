@@ -138,10 +138,10 @@ class _StepInputState extends State<StepInput> {
               }
               return null;
             },
-            initialValue: profile.srcCredentials['azure-blob']['account_key'],
+            initialValue: profile.srcCredentials['azure-blob']['account_name'],
             keyboardType: TextInputType.text,
             decoration: InputDecoration(labelText: 'Account name'),
-            onSaved: (val) => profile.srcCredentials['azure-blob']['account_key'] = val,
+            onSaved: (val) => profile.srcCredentials['azure-blob']['account_name'] = val,
           ),
           TextFormField(
             validator: (value) {
@@ -150,10 +150,10 @@ class _StepInputState extends State<StepInput> {
               }
               return null;
             },
-            initialValue: profile.srcCredentials['azure-blob']['access_key_id'],
+            initialValue: profile.srcCredentials['azure-blob']['account_key'],
             keyboardType: TextInputType.text,
             decoration: InputDecoration(labelText: 'Account key'),
-            onSaved: (val) => profile.srcCredentials['azure-blob']['access_key_id'] = val,
+            onSaved: (val) => profile.srcCredentials['azure-blob']['account_key'] = val,
           ),
           TextFormField(
             validator: (value) {

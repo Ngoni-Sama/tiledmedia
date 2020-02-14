@@ -139,10 +139,10 @@ class _StepOutputState extends State<StepOutput> {
               }
               return null;
             },
-            initialValue: profile.destCredentials['azure-blob']['account_key'],
+            initialValue: profile.destCredentials['azure-blob']['account_name'],
             keyboardType: TextInputType.text,
             decoration: InputDecoration(labelText: 'Account name'),
-            onSaved: (val) => profile.destCredentials['azure-blob']['account_key'] = val,
+            onSaved: (val) => profile.destCredentials['azure-blob']['account_name'] = val,
           ),
           TextFormField(
             validator: (value) {
@@ -151,10 +151,10 @@ class _StepOutputState extends State<StepOutput> {
               }
               return null;
             },
-            initialValue: profile.destCredentials['azure-blob']['access_key_id'],
+            initialValue: profile.destCredentials['azure-blob']['account_key'],
             keyboardType: TextInputType.text,
             decoration: InputDecoration(labelText: 'Account key'),
-            onSaved: (val) => profile.destCredentials['azure-blob']['access_key_id'] = val,
+            onSaved: (val) => profile.destCredentials['azure-blob']['account_key'] = val,
           ),
           TextFormField(
             validator: (value) {
@@ -191,10 +191,10 @@ class _StepOutputState extends State<StepOutput> {
               }
               return null;
             },
-            initialValue: profile.destCredentials['azure-blob']['account_key'],
+            initialValue: profile.destCredentials['akamai-ns']['host'],
             keyboardType: TextInputType.text,
             decoration: InputDecoration(labelText: 'Akamai host e.g. emea-myfiels-nsu.akamaihd.net'),
-            onSaved: (val) => profile.destCredentials['azure-blob']['account_key'] = val,
+            onSaved: (val) => profile.destCredentials['akamai-ns']['host'] = val,
           ),
           TextFormField(
             validator: (value) {
@@ -313,22 +313,7 @@ class _StepOutputState extends State<StepOutput> {
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(top: 32, bottom: 8),
-            child: Text('Output HTTP Details', style: TextStyle(fontSize: 16)),
-          ),
-          TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Output HTTP URL cannot be empty';
-              }
-              if (!Uri.parse(value).isAbsolute) {
-                return 'This field requires a valid URL address';
-              }
-              return null;
-            },
-            initialValue: profile.url,
-            keyboardType: TextInputType.url,
-            decoration: InputDecoration(labelText: 'Output HTTP URL'),
-            onSaved: (val) => profile.url = val,
+            child: Text('You selected HTTP destination location, please proceed to final step', style: TextStyle(fontSize: 16)),
           ),
         ],
       ),

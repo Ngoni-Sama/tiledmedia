@@ -64,7 +64,7 @@ class _ProfilesState extends State<Profiles> {
             child: MaterialButton(
               color: Colors.white,
               textColor: AppColors.primaryColor,
-              child: Icon(Icons.edit, size: 24),
+              child: Icon(Icons.remove_red_eye, size: 24),
               padding: EdgeInsets.all(12),
               shape: CircleBorder(),
               onPressed: () {

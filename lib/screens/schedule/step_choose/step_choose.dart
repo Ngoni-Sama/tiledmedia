@@ -67,6 +67,7 @@ class _StepChooseState extends State<StepChoose> {
         );
       });
     });
+    Encode.recommends = [];
     setState(() {
       this.recommended = type;
       this.encode.chosenProfile = type;
@@ -167,7 +168,7 @@ class _StepChooseState extends State<StepChoose> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   new PrimaryButton(
-                    onPressed: onPrev,
+                    onPressed: () => Navigator.of(context).pop(),
                     buttonName: 'Back',
                   ),
                   new PrimaryButton(

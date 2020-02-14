@@ -1,6 +1,9 @@
 import 'package:tiledmedia/data/models/profile.model.dart';
 
 class Encode {
+
+  static List<dynamic> recommends = [];
+
   int width;
   int height;
   int frameRateNumber;
@@ -12,7 +15,25 @@ class Encode {
   String comment;
   String packagingFormat;
   String outputFolder;
-  bool autoAudioKbpsPerChannel;
+  int autoAudioKbpsPerChannel;
+  String independentAudioFileIndex;
+  String embeddedTrackIndex;
+  String trackName;
+  String language;
+  String spatialAudio;
+  int targetBitrate;
+  String audioCodec;
+
+  String srcFile;
+  String secondaryFile;
+  bool imageSequence;
+  bool rawYUV;
+  int startingIndex;
+  String yuvFormat;
+  String audioSrcFile;
+  String folder;
+  String url;
+  bool acceptInputFailures;
 
   Encode() {
     // initialize properties
@@ -20,6 +41,10 @@ class Encode {
     height = 1080;
     frameRateNumber = 30000;
     frameRateDenom = 1001;
-    autoAudioKbpsPerChannel = false;
+    language = 'en';
+    audioCodec = 'aac';
+    imageSequence = false;
+    rawYUV = false;
+    acceptInputFailures = false;
   }
 }

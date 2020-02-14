@@ -13,7 +13,6 @@ class Profile {
   Map srcCredentials;
   String destLocType;
   Map destCredentials;
-  String url;
   String notificationType;
   String webhook;
   String mail;
@@ -73,7 +72,6 @@ class Profile {
         'path': '',
       }
     };
-    this.url = '';
     this.notificationType = 'mail';
     this.webhook = '';
     this.mail = '';
@@ -164,7 +162,6 @@ class Profile {
         srcCredentials = json['srcCredentials'],
         destLocType = json['destLocType'],
         destCredentials = json['destCredentials'],
-        url = json['url'],
         notificationType = json['notificationType'],
         webhook = json['webhook'],
         mail = json['mail'];
@@ -181,7 +178,6 @@ class Profile {
       'srcCredentials': srcCredentials,
       'destLocType': destLocType,
       'destCredentials': destCredentials,
-      'url': url,
       'notificationType': notificationType,
       'webhook': webhook,
       'mail': mail,

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/encode.model.dart';
 import 'package:tiledmedia/screens/schedule/step_choose/index.dart';
 import 'package:tiledmedia/screens/schedule/step_encode/index.dart';
+import 'package:tiledmedia/screens/schedule/step_schedule/index.dart';
+import 'package:tiledmedia/screens/schedule/step_video/index.dart';
+import 'package:tiledmedia/screens/schedule/step_video/step_video.dart';
 import 'package:tiledmedia/widgets/appbar_layout/index.dart';
 
 class Schedule extends StatefulWidget {
@@ -29,13 +32,33 @@ class _ScheduleState extends State<Schedule> {
         isActive: true,
       ),
       Step(
-        title: const Text('Schedule Encode'),
+        title: const Text('Encode Setting'),
         content: new StepEncode(
           encode: encode,
           onNext: _moveNext,
           onPrev: _movePrev,
         ),
         state: _getState(1),
+        isActive: true,
+      ),
+      Step(
+        title: const Text('Video Setting'),
+        content: new StepVideo(
+          encode: encode,
+          onNext: _moveNext,
+          onPrev: _movePrev,
+        ),
+        state: _getState(2),
+        isActive: true,
+      ),
+      Step(
+        title: const Text('Schedule'),
+        content: new StepSchedule(
+          encode: encode,
+          onNext: _moveNext,
+          onPrev: _movePrev,
+        ),
+        state: _getState(3),
         isActive: true,
       ),
     ];

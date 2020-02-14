@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/encode.model.dart';
-import 'package:tiledmedia/data/models/profile.model.dart';
 import 'package:tiledmedia/services/profile.service.dart';
 import 'package:tiledmedia/util/common.dart';
 import 'package:tiledmedia/util/constants.dart';
@@ -23,7 +22,6 @@ class _StepEncodeState extends State<StepEncode> {
   VoidCallback onNext;
   VoidCallback onPrev;
 
-  List<String> profiles = [];
   Encode encode;
 
   String videoProfileName;
@@ -42,14 +40,24 @@ class _StepEncodeState extends State<StepEncode> {
   }
 
   initProfiles() {
-    _profileService.postProfiles(encode).then((value) {
-      for (int i = 0; i < value.length; i++) {
-        profiles.add(value[i]['profile_name']);
-      }
-      if (profiles.length > 0) {
-        videoProfileName = profiles[0];
-      }
-    });
+    if (Encode.recommends.length == 0) {
+      _profileService.postProfiles(encode).then((value) {
+        for (int i = 0; i < value.length; i++) {
+          setState(() {
+            Encode.recommends.add(value[i]['profile_name']);
+          });
+        }
+        if (Encode.recommends.length > 0) {
+          setState(() {
+            videoProfileName = Encode.recommends[0];
+          });
+        }
+      });
+    } else {
+      setState(() {
+        videoProfileName = encode.videoProfileName;
+      });
+    }
   }
 
   onSubmit() {
@@ -65,6 +73,127 @@ class _StepEncodeState extends State<StepEncode> {
       encode.videoProfileName = val;
       videoProfileName = val;
     });
+  }
+
+  audioPanel() {
+    if (encode.autoAudioKbpsPerChannel == null) {
+      return Container();
+    } else {
+      return Container(
+        width: double.infinity,
+        decoration: BoxDecoration(color: Colors.black12),
+        padding: EdgeInsets.only(right: 8, left: 8, bottom: 4),
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    child: TextFormField(
+                      initialValue: encode.independentAudioFileIndex,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(labelText: 'Independent audio file index'),
+                      onSaved: (val) => setState(() => encode.independentAudioFileIndex = val),
+                    ),
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    child: TextFormField(
+                      initialValue: encode.embeddedTrackIndex,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(labelText: 'Embedded track index'),
+                      onSaved: (val) => setState(() => encode.embeddedTrackIndex = val),
+                    ),
+                    padding: EdgeInsets.only(left: 8),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    child: TextFormField(
+                      initialValue: encode.trackName,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(labelText: 'Track name'),
+                      onSaved: (val) => setState(() => encode.trackName = val),
+                    ),
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Target bitrate cannot be empty';
+                        }
+                        if (!Common.isNumeric(value)) {
+                          return 'This field should be numeric';
+                        }
+                        return null;
+                      },
+                      initialValue: encode.targetBitrate == null ? '' : encode.targetBitrate.toString(),
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(labelText: 'Target bitrate in kbps'),
+                      onSaved: (val) => setState(() => encode.targetBitrate = int.tryParse(val)),
+                    ),
+                    padding: EdgeInsets.only(left: 8),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    child: DropdownButtonFormField(
+                      items: Constants.languages.entries.map((itm) {
+                        return new DropdownMenuItem(
+                          value: itm.key,
+                          child: new Text(itm.value),
+                        );
+                      }).toList(),
+                      value: encode.language,
+                      onChanged: (val) => setState(() => encode.language = val),
+                      decoration: InputDecoration(labelText: 'Language'),
+                      onSaved: (val) => setState(() => encode.language = val),
+                    ),
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    child: DropdownButtonFormField(
+                      items: Constants.spatials.entries.map((itm) {
+                        return new DropdownMenuItem(
+                          value: itm.key,
+                          child: new Text(itm.value),
+                        );
+                      }).toList(),
+                      value: encode.spatialAudio,
+                      onChanged: (val) => setState(() => encode.spatialAudio = val),
+                      decoration: InputDecoration(labelText: 'Spatial audio'),
+                      onSaved: (val) => setState(() => encode.spatialAudio = val),
+                    ),
+                    padding: EdgeInsets.only(left: 8),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -95,7 +224,7 @@ class _StepEncodeState extends State<StepEncode> {
               onSaved: (val) => setState(() => encode.comment = val),
             ),
             DropdownButtonFormField(
-              items: profiles.map((itm) {
+              items: Encode.recommends.map((itm) {
                 return new DropdownMenuItem(
                   value: itm,
                   child: new Text(itm),
@@ -130,14 +259,23 @@ class _StepEncodeState extends State<StepEncode> {
               decoration: InputDecoration(labelText: 'Specify the output folder'),
               onSaved: (val) => setState(() => encode.outputFolder = val),
             ),
-            SwitchListTile(
-              contentPadding: EdgeInsets.only(left: 0),
-              title: Text('Encode audio channels automatically'),
-              value: encode.autoAudioKbpsPerChannel,
-              onChanged: (value) {
-                setState(() => encode.autoAudioKbpsPerChannel = value);
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return null;
+                }
+                if (!Common.isNumeric(value)) {
+                  return 'This field must be numeric';
+                }
+                return null;
               },
+              initialValue: encode.autoAudioKbpsPerChannel != null ? encode.autoAudioKbpsPerChannel.toString() : '',
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: 'Auto audio KBPS per channel'),
+              onChanged: (val) => setState(() => encode.autoAudioKbpsPerChannel = val != '' ? int.tryParse(val) : null),
+              onSaved: (val) => setState(() => encode.autoAudioKbpsPerChannel = val != '' ? int.tryParse(val) : null),
             ),
+            audioPanel(),
             Container(
               margin: EdgeInsets.only(top: AppStyles.gap_16),
               child: Row(

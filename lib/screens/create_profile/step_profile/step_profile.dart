@@ -139,7 +139,7 @@ class _StepProfileState extends State<StepProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   new PrimaryButton(
-                    onPressed: onPrev,
+                    onPressed: () => Navigator.of(context).pop(),
                     buttonName: 'Back',
                   ),
                   new PrimaryButton(
