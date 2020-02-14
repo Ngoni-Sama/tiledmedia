@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/encode.model.dart';
 import 'package:tiledmedia/screens/schedule/step_choose/index.dart';
+import 'package:tiledmedia/screens/schedule/step_encode/index.dart';
 import 'package:tiledmedia/widgets/appbar_layout/index.dart';
 
 class Schedule extends StatefulWidget {
@@ -29,7 +30,7 @@ class _ScheduleState extends State<Schedule> {
       ),
       Step(
         title: const Text('Schedule Encode'),
-        content: new StepChoose(
+        content: new StepEncode(
           encode: encode,
           onNext: _moveNext,
           onPrev: _movePrev,
@@ -70,7 +71,9 @@ class _ScheduleState extends State<Schedule> {
   @override
   Widget build(BuildContext context) {
     if (encode == null) {
-      encode = new Encode();
+      setState(() {
+        encode = new Encode();
+      });
     }
     return new Scaffold(
       appBar: new AppBarLayout(appBarTitle: 'Schedule Video', context: context),

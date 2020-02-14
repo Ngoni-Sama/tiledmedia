@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/profile.model.dart';
 import 'package:tiledmedia/util/common.dart';
+import 'package:tiledmedia/util/constants.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
@@ -56,7 +57,7 @@ class _StepOutputState extends State<StepOutput> {
             child: Text('S3 Bucket Details', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           ),
           DropdownButtonFormField(
-            items: Globals.s3Regions.entries.map((itm) {
+            items: Constants.s3Regions.entries.map((itm) {
               return new DropdownMenuItem(
                 value: itm.key,
                 child: new Text(itm.value),
@@ -364,7 +365,7 @@ class _StepOutputState extends State<StepOutput> {
         child: Column(
           children: <Widget>[
             DropdownButtonFormField(
-              items: Globals.destLocType.entries.map((itm) {
+              items: Constants.destLocType.entries.map((itm) {
                 return new DropdownMenuItem(
                   value: itm.key,
                   child: new Text(itm.value),

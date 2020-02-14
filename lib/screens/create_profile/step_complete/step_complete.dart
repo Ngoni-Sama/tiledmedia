@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/profile.model.dart';
+import 'package:tiledmedia/util/constants.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
@@ -67,7 +68,7 @@ class _StepCompleteState extends State<StepComplete> {
         child: Column(
           children: <Widget>[
             DropdownButtonFormField(
-              items: Globals.notificationType.entries.map((itm) {
+              items: Constants.notificationType.entries.map((itm) {
                 return new DropdownMenuItem(
                   value: itm.key,
                   child: new Text(itm.value),

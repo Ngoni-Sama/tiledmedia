@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/profile.model.dart';
 import 'package:tiledmedia/util/common.dart';
+import 'package:tiledmedia/util/constants.dart';
 import 'package:tiledmedia/util/globals.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
@@ -85,7 +86,7 @@ class _StepProfileState extends State<StepProfile> {
               onSaved: (val) => setState(() => profile.version = int.parse(val)),
             ),
             DropdownButtonFormField(
-              items: Globals.inProjectionType.entries.map((itm) {
+              items: Constants.inProjectionType.entries.map((itm) {
                 return new DropdownMenuItem(
                   value: itm.key,
                   child: new Text(itm.value),
@@ -101,7 +102,7 @@ class _StepProfileState extends State<StepProfile> {
               onSaved: (val) => setState(() => profile.inProjectionType = val),
             ),
             DropdownButtonFormField(
-              items: Globals.outProjectionType.entries.map((itm) {
+              items: Constants.outProjectionType.entries.map((itm) {
                 return new DropdownMenuItem(
                   value: itm.key,
                   child: new Text(itm.value),
@@ -117,7 +118,7 @@ class _StepProfileState extends State<StepProfile> {
               onSaved: (val) => setState(() => profile.outProjectionType = val),
             ),
             DropdownButtonFormField(
-              items: Globals.encodeQuality.entries.map((itm) {
+              items: Constants.encodeQuality.entries.map((itm) {
                 return new DropdownMenuItem(
                   value: itm.key,
                   child: new Text(itm.value),

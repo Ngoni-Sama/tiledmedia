@@ -73,17 +73,6 @@ class _StepChooseState extends State<StepChoose> {
     });
   }
 
-  List<DropdownMenuItem<String>> getProfiles() {
-    List<DropdownMenuItem> menus = [];
-    for (int i = 0; i < profiles.length; i++) {
-      menus.add(DropdownMenuItem(
-        value: i,
-        child: new Text(profiles[i].name),
-      ));
-    }
-    return menus.map((e) => e as DropdownMenuItem<String>).toList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -93,17 +82,6 @@ class _StepChooseState extends State<StepChoose> {
         autovalidate: true,
         child: Column(
           children: <Widget>[
-//            TextFormField(
-//              validator: (value) {
-//                if (value.contains(' ')) {
-//                  return 'Encode name cannot contain whitespace';
-//                }
-//                return null;
-//              },
-//              keyboardType: TextInputType.text,
-//              decoration: InputDecoration(labelText: 'Short name for your encode'),
-//              onSaved: (val) => setState(() => val),
-//            ),
             DropdownButtonFormField(
               items: profiles.map((itm) {
                 return new DropdownMenuItem(
