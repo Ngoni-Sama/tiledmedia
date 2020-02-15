@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiledmedia/data/models/encode.model.dart';
+import 'package:tiledmedia/util/common.dart';
 import 'package:tiledmedia/util/constants.dart';
 import 'package:tiledmedia/util/theme.dart';
 import 'package:tiledmedia/widgets/primary_button/primary_button.dart';
@@ -50,31 +51,16 @@ class _StepVideoState extends State<StepVideo> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
+              Container(child: Column(children: <Widget>[Text('Region'), Text(encode.chosenProfile.srcCredentials['s3bucket']['region'], style: AppStyles.boldTextStyle)])),
               Container(
-                  child: Column(children: <Widget>[
-                Text('Region'),
-                Text(encode.chosenProfile.srcCredentials['s3bucket']['region'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child: Column(
+                      children: <Widget>[Text('Custom Endpoint'), Text(encode.chosenProfile.srcCredentials['s3bucket']['custom_endpoint'], style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Bucket'), Text(encode.chosenProfile.srcCredentials['s3bucket']['bucket'], style: AppStyles.boldTextStyle)])),
               Container(
-                  child: Column(children: <Widget>[
-                Text('Custom Endpoint'),
-                Text(encode.chosenProfile.srcCredentials['s3bucket']['custom_endpoint'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child: Column(children: <Widget>[Text('Access Key ID'), Text(encode.chosenProfile.srcCredentials['s3bucket']['access_key_id'], style: AppStyles.boldTextStyle)])),
               Container(
-                  child: Column(children: <Widget>[
-                Text('Bucket'),
-                Text(encode.chosenProfile.srcCredentials['s3bucket']['bucket'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
-              Container(
-                  child: Column(children: <Widget>[
-                Text('Access Key ID'),
-                Text(encode.chosenProfile.srcCredentials['s3bucket']['access_key_id'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
-              Container(
-                  child: Column(children: <Widget>[
-                Text('Secret Access Key'),
-                Text(encode.chosenProfile.srcCredentials['s3bucket']['secret_access_key'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child: Column(
+                      children: <Widget>[Text('Secret Access Key'), Text(encode.chosenProfile.srcCredentials['s3bucket']['secret_access_key'], style: AppStyles.boldTextStyle)])),
             ],
           ),
         );
@@ -87,20 +73,10 @@ class _StepVideoState extends State<StepVideo> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Container(
-                  child: Column(children: <Widget>[
-                Text('Account Name'),
-                Text(encode.chosenProfile.srcCredentials['azure-blob']['account_name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child: Column(children: <Widget>[Text('Account Name'), Text(encode.chosenProfile.srcCredentials['azure-blob']['account_name'], style: AppStyles.boldTextStyle)])),
               Container(
-                  child: Column(children: <Widget>[
-                Text('Account Key'),
-                Text(encode.chosenProfile.srcCredentials['azure-blob']['account_key'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
-              Container(
-                  child: Column(children: <Widget>[
-                Text('Container'),
-                Text(encode.chosenProfile.srcCredentials['azure-blob']['container'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child: Column(children: <Widget>[Text('Account Key'), Text(encode.chosenProfile.srcCredentials['azure-blob']['account_key'], style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Container'), Text(encode.chosenProfile.srcCredentials['azure-blob']['container'], style: AppStyles.boldTextStyle)])),
             ],
           ),
         );
@@ -118,31 +94,17 @@ class _StepVideoState extends State<StepVideo> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
+              Container(child: Column(children: <Widget>[Text('Region'), Text(encode.chosenProfile.destCredentials['s3bucket']['region'], style: AppStyles.boldTextStyle)])),
               Container(
-                  child: Column(children: <Widget>[
-                Text('Region'),
-                Text(encode.chosenProfile.destCredentials['s3bucket']['region'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child: Column(
+                      children: <Widget>[Text('Custom Endpoint'), Text(encode.chosenProfile.destCredentials['s3bucket']['custom_endpoint'], style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Bucket'), Text(encode.chosenProfile.destCredentials['s3bucket']['bucket'], style: AppStyles.boldTextStyle)])),
               Container(
-                  child: Column(children: <Widget>[
-                Text('Custom Endpoint'),
-                Text(encode.chosenProfile.destCredentials['s3bucket']['custom_endpoint'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child:
+                      Column(children: <Widget>[Text('Access Key ID'), Text(encode.chosenProfile.destCredentials['s3bucket']['access_key_id'], style: AppStyles.boldTextStyle)])),
               Container(
-                  child: Column(children: <Widget>[
-                Text('Bucket'),
-                Text(encode.chosenProfile.destCredentials['s3bucket']['bucket'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
-              Container(
-                  child: Column(children: <Widget>[
-                Text('Access Key ID'),
-                Text(encode.chosenProfile.destCredentials['s3bucket']['access_key_id'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
-              Container(
-                  child: Column(children: <Widget>[
-                Text('Secret Access Key'),
-                Text(encode.chosenProfile.destCredentials['s3bucket']['secret_access_key'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child: Column(
+                      children: <Widget>[Text('Secret Access Key'), Text(encode.chosenProfile.destCredentials['s3bucket']['secret_access_key'], style: AppStyles.boldTextStyle)])),
             ],
           ),
         );
@@ -155,20 +117,12 @@ class _StepVideoState extends State<StepVideo> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Container(
-                  child: Column(children: <Widget>[
-                Text('Account Name'),
-                Text(encode.chosenProfile.destCredentials['azure-blob']['account_name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child:
+                      Column(children: <Widget>[Text('Account Name'), Text(encode.chosenProfile.destCredentials['azure-blob']['account_name'], style: AppStyles.boldTextStyle)])),
               Container(
-                  child: Column(children: <Widget>[
-                Text('Account Key'),
-                Text(encode.chosenProfile.destCredentials['azure-blob']['account_key'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child: Column(children: <Widget>[Text('Account Key'), Text(encode.chosenProfile.destCredentials['azure-blob']['account_key'], style: AppStyles.boldTextStyle)])),
               Container(
-                  child: Column(children: <Widget>[
-                Text('Container'),
-                Text(encode.chosenProfile.destCredentials['azure-blob']['container'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+                  child: Column(children: <Widget>[Text('Container'), Text(encode.chosenProfile.destCredentials['azure-blob']['container'], style: AppStyles.boldTextStyle)])),
             ],
           ),
         );
@@ -180,17 +134,9 @@ class _StepVideoState extends State<StepVideo> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Container(
-                  child: Column(
-                      children: <Widget>[Text('Host'), Text(encode.chosenProfile.destCredentials['wangsu']['host'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))])),
-              Container(
-                  child: Column(children: <Widget>[
-                Text('Token'),
-                Text(encode.chosenProfile.destCredentials['wangsu']['token'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
-              Container(
-                  child: Column(
-                      children: <Widget>[Text('Path'), Text(encode.chosenProfile.destCredentials['wangsu']['path'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))])),
+              Container(child: Column(children: <Widget>[Text('Host'), Text(encode.chosenProfile.destCredentials['wangsu']['host'], style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Token'), Text(encode.chosenProfile.destCredentials['wangsu']['token'], style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Path'), Text(encode.chosenProfile.destCredentials['wangsu']['path'], style: AppStyles.boldTextStyle)])),
             ],
           ),
         );
@@ -202,31 +148,11 @@ class _StepVideoState extends State<StepVideo> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Container(
-                  child: Column(children: <Widget>[
-                Text('Host'),
-                Text(encode.chosenProfile.destCredentials['akamai-ns']['host'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
-              Container(
-                  child: Column(children: <Widget>[
-                Text('Key Name'),
-                Text(encode.chosenProfile.destCredentials['akamai-ns']['keyname'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
-              Container(
-                  child: Column(children: <Widget>[
-                Text('Key'),
-                Text(encode.chosenProfile.destCredentials['akamai-ns']['key'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
-              Container(
-                  child: Column(children: <Widget>[
-                Text('Cpcode'),
-                Text(encode.chosenProfile.destCredentials['akamai-ns']['cpcode'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
-              Container(
-                  child: Column(children: <Widget>[
-                Text('path'),
-                Text(encode.chosenProfile.destCredentials['akamai-ns']['path'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
-              ])),
+              Container(child: Column(children: <Widget>[Text('Host'), Text(encode.chosenProfile.destCredentials['akamai-ns']['host'], style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Key Name'), Text(encode.chosenProfile.destCredentials['akamai-ns']['keyname'], style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Key'), Text(encode.chosenProfile.destCredentials['akamai-ns']['key'], style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Cpcode'), Text(encode.chosenProfile.destCredentials['akamai-ns']['cpcode'], style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('path'), Text(encode.chosenProfile.destCredentials['akamai-ns']['path'], style: AppStyles.boldTextStyle)])),
             ],
           ),
         );
@@ -310,6 +236,15 @@ class _StepVideoState extends State<StepVideo> {
                     padding: EdgeInsets.only(left: 8, right: 8, bottom: 4),
                     decoration: BoxDecoration(color: Colors.black12),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value == '') {
+                          return null;
+                        }
+                        if (!Common.isNumeric(value)) {
+                          return 'This field should be numeric';
+                        }
+                        return null;
+                      },
                       initialValue: encode.startingIndex != null ? encode.startingIndex.toString() : '',
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(labelText: 'Starting Index for image sequence'),

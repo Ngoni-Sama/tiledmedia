@@ -23,6 +23,7 @@ class _StepEncodeState extends State<StepEncode> {
   VoidCallback onPrev;
 
   Encode encode;
+  String audioIndex;
 
   String videoProfileName;
   ProfileService _profileService = ProfileService.getInstance();
@@ -58,6 +59,16 @@ class _StepEncodeState extends State<StepEncode> {
         videoProfileName = encode.videoProfileName;
       });
     }
+
+    if (encode.independentAudioFileIndex != 0 || (encode.independentAudioFileIndex == 0 && encode.embeddedTrackIndex == 0)) {
+      setState(() {
+        audioIndex = 'idp';
+      });
+    } else if (encode.embeddedTrackIndex != 0) {
+      setState(() {
+        audioIndex = 'emb';
+      });
+    }
   }
 
   onSubmit() {
@@ -76,7 +87,7 @@ class _StepEncodeState extends State<StepEncode> {
   }
 
   audioPanel() {
-    if (encode.autoAudioKbpsPerChannel == null) {
+    if (encode.autoAudioKbpsPerChannel > 0) {
       return Container();
     } else {
       return Container(
@@ -90,11 +101,13 @@ class _StepEncodeState extends State<StepEncode> {
                 Flexible(
                   flex: 1,
                   child: Container(
-                    child: TextFormField(
-                      initialValue: encode.independentAudioFileIndex,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(labelText: 'Independent audio file index'),
-                      onSaved: (val) => setState(() => encode.independentAudioFileIndex = val),
+                    child: SwitchListTile(
+                      contentPadding: EdgeInsets.only(left: 0),
+                      title: Text('Audio Index'),
+                      value: audioIndex == 'idp',
+                      onChanged: (value) {
+                        setState(() => audioIndex = (audioIndex == 'idp' ? 'emb' : 'idp'));
+                      },
                     ),
                     padding: EdgeInsets.only(right: 8),
                   ),
@@ -103,10 +116,25 @@ class _StepEncodeState extends State<StepEncode> {
                   flex: 1,
                   child: Container(
                     child: TextFormField(
-                      initialValue: encode.embeddedTrackIndex,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(labelText: 'Embedded track index'),
-                      onSaved: (val) => setState(() => encode.embeddedTrackIndex = val),
+                      validator: (value) {
+                        if (value == '') {
+                          return 'This field cannot be empty';
+                        }
+                        if (!Common.isNumeric(value)) {
+                          return 'This field should be numeric';
+                        }
+                        return null;
+                      },
+                      initialValue: audioIndex == 'idp' ? encode.independentAudioFileIndex.toString() : encode.embeddedTrackIndex.toString(),
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(labelText: audioIndex == 'idp' ? 'Independent audio file index' : 'Embedded track index'),
+                      onSaved: (val) => setState(() {
+                        if (audioIndex == 'idp') {
+                          encode.independentAudioFileIndex = int.tryParse(val);
+                        } else {
+                          encode.embeddedTrackIndex = int.tryParse(val);
+                        }
+                      }),
                     ),
                     padding: EdgeInsets.only(left: 8),
                   ),
@@ -207,6 +235,9 @@ class _StepEncodeState extends State<StepEncode> {
           children: <Widget>[
             TextFormField(
               validator: (value) {
+                if (value.isEmpty) {
+                  return 'Encode name cannot be empty';
+                }
                 if (value.contains(' ')) {
                   return 'Encode name cannot contain whitespace';
                 }
@@ -269,11 +300,11 @@ class _StepEncodeState extends State<StepEncode> {
                 }
                 return null;
               },
-              initialValue: encode.autoAudioKbpsPerChannel != null ? encode.autoAudioKbpsPerChannel.toString() : '',
+              initialValue: encode.autoAudioKbpsPerChannel.toString(),
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Auto audio KBPS per channel'),
-              onChanged: (val) => setState(() => encode.autoAudioKbpsPerChannel = val != '' ? int.tryParse(val) : null),
-              onSaved: (val) => setState(() => encode.autoAudioKbpsPerChannel = val != '' ? int.tryParse(val) : null),
+              onChanged: (val) => setState(() => encode.autoAudioKbpsPerChannel = val != '' ? int.tryParse(val) : 0),
+              onSaved: (val) => setState(() => encode.autoAudioKbpsPerChannel = val != '' ? int.tryParse(val) : 0),
             ),
             audioPanel(),
             Container(

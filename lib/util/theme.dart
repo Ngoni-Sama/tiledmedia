@@ -19,6 +19,7 @@ class AppColors {
 class AppStyles {
 
   static const defaultTextStyle = TextStyle(color: Color(0xffffffff));
+  static const boldTextStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
 
   static const double gap_16 = 16;
 }

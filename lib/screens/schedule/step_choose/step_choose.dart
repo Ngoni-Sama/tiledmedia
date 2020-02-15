@@ -57,11 +57,11 @@ class _StepChooseState extends State<StepChoose> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Container(child: Column(children: <Widget>[Text('Name'), Text(pro.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))])),
-              Container(child: Column(children: <Widget>[Text('Remarks'), Text(pro.remark, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))])),
-              Container(child: Column(children: <Widget>[Text('Version'), Text(pro.version.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))])),
-              Container(child: Column(children: <Widget>[Text('Input Projection'), Text(pro.inProjectionType, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))])),
-              Container(child: Column(children: <Widget>[Text('Output Projection'), Text(pro.outProjectionType, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))])),
+              Container(child: Column(children: <Widget>[Text('Name'), Text(pro.name, style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Remarks'), Text(pro.remark, style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Version'), Text(pro.version.toString(), style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Input Projection'), Text(pro.inProjectionType, style: AppStyles.boldTextStyle)])),
+              Container(child: Column(children: <Widget>[Text('Output Projection'), Text(pro.outProjectionType, style: AppStyles.boldTextStyle)])),
             ],
           ),
         );

@@ -16,8 +16,8 @@ class Encode {
   String packagingFormat;
   String outputFolder;
   int autoAudioKbpsPerChannel;
-  String independentAudioFileIndex;
-  String embeddedTrackIndex;
+  int independentAudioFileIndex;
+  int embeddedTrackIndex;
   String trackName;
   String language;
   String spatialAudio;
@@ -41,10 +41,29 @@ class Encode {
     height = 1080;
     frameRateNumber = 30000;
     frameRateDenom = 1001;
+
+    name = '';
+    comment = '';
+    packagingFormat = '';
+    outputFolder = '';
+    outputFolder = '';
+    autoAudioKbpsPerChannel = 0;
+    independentAudioFileIndex = 0;
+    embeddedTrackIndex = 0;
+    trackName = '';
     language = 'en';
+    spatialAudio = '';
     audioCodec = 'aac';
+
+    srcFile = '';
+    secondaryFile = '';
     imageSequence = false;
     rawYUV = false;
+    startingIndex = 0;
+    yuvFormat = '';
+    audioSrcFile = '';
+    folder = '';
+    url = '';
     acceptInputFailures = false;
   }
 }
