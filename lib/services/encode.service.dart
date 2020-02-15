@@ -204,4 +204,23 @@ class EncodeService {
     }
     return null;
   }
+
+  Future<Map> getStatus(String encodeUUID) async {
+    String request = jsonEncode({
+      "customer_id": Globals.setting.customerID,
+      "api_auth_token": Globals.setting.apiAuthToken,
+      "encode_uuid": encodeUUID,
+    });
+    String url = Config.apiHost + '/encoding/query';
+    Map<String, String> headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'x-api-key': Globals.setting.xAPIKey,
+    };
+    var response = await http.post(url, headers: headers, body: request);
+    if (response.statusCode == 200) {
+      Map res = jsonDecode(response.body);
+      return res;
+    }
+    return null;
+  }
 }

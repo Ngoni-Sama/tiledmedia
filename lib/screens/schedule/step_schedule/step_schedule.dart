@@ -23,6 +23,9 @@ class _StepScheduleState extends State<StepSchedule> {
   Encode encode;
   Profile profile;
   String encodeUUID;
+  String state = '';
+  String failedCause = '';
+  double progress = 0;
 
   EncodeService _encodeService = EncodeService.getInstance();
 
@@ -46,13 +49,28 @@ class _StepScheduleState extends State<StepSchedule> {
         setState(() {
           encodeUUID = value;
         });
-        startProgress();
+        checkProgress();
       }
     });
   }
 
-  startProgress() {
-
+  checkProgress() {
+    _encodeService.getStatus(encodeUUID).then((value) {
+      if (value != null) {
+        setState(() {
+          state = value['state'];
+          if (state == 'failed') {
+            failedCause = value['failed_cause'];
+          }
+          if (state == 'encoding') {
+            progress = value['progress_pct'];
+          }
+        });
+        Future.delayed(Duration(seconds: 5), () {
+          checkProgress();
+        });
+      }
+    });
   }
 
   onCancel() {
@@ -63,6 +81,24 @@ class _StepScheduleState extends State<StepSchedule> {
         });
       }
     });
+  }
+
+  statusPanel() {
+    return encodeUUID != null
+        ? Container(
+            decoration: BoxDecoration(color: Colors.lightBlueAccent),
+            padding: EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Container(child: Column(children: <Widget>[Text('Encode UUID'), Text(encodeUUID, style: AppStyles.boldTextStyle)])),
+                Container(child: Column(children: <Widget>[Text('State'), Text(state, style: AppStyles.boldTextStyle)])),
+                Container(child: Column(children: <Widget>[Text('Failed Cause'), Text(failedCause, style: AppStyles.boldTextStyle)])),
+                Container(child: Column(children: <Widget>[Text('Progress'), Text(progress.toString(), style: AppStyles.boldTextStyle)])),
+              ],
+            ),
+          )
+        : Container();
   }
 
   sourceVideoDetails() {
@@ -276,6 +312,14 @@ class _StepScheduleState extends State<StepSchedule> {
                 ],
               ),
             ),
+            Container(
+              padding: EdgeInsets.only(bottom: 16, top: 24),
+              child: Text(
+                'Video Encoding Status',
+                style: TextStyle(color: Colors.blueAccent, fontSize: 16),
+              ),
+            ),
+            statusPanel(),
             Container(
               margin: EdgeInsets.only(top: AppStyles.gap_16),
               child: Row(
