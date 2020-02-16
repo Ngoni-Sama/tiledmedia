@@ -46,13 +46,15 @@ class AppBarLayout extends AppBar {
                         ),
                       ),
                       actions: <Widget>[
-                        PrimaryButton(buttonName: 'Ok', onPressed: () {
-                          Navigator.of(context).pop();
-                          showDialog(
-                            context: context,
-                            builder: (context) => SettingDialog(),
-                          );
-                        }),
+                        PrimaryButton(
+                            buttonName: 'Ok',
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              showDialog(
+                                context: context,
+                                builder: (context) => SettingDialog(),
+                              );
+                            }),
                         Padding(
                           padding: EdgeInsets.only(right: 8),
                           child: DefaultButton(

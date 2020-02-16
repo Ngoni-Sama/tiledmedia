@@ -47,6 +47,7 @@ class _SettingDialogState extends State<SettingDialog> {
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('Input your secret info provided by TiledMedia', style: TextStyle(color: AppColors.defaultColor)),
               TextFormField(

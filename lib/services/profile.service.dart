@@ -18,7 +18,6 @@ class ProfileService {
   }
 
   Future<List<dynamic>> postProfiles(Encode encode) async {
-
     String body = jsonEncode({
       "customer_id": Globals.setting.customerID,
       "api_auth_token": Globals.setting.apiAuthToken,

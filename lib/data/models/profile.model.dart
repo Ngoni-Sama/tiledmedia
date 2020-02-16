@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:tiledmedia/util/globals.dart';
 
 class Profile {
+  // profile properties
   String name;
   String remark;
   int version;
@@ -9,10 +10,15 @@ class Profile {
   String outProjectionType;
   String encodeQuality;
 
+  // source location properties
   String srcLocType;
   Map srcCredentials;
+
+  // destination location properties
   String destLocType;
   Map destCredentials;
+
+  // notification
   String notificationType;
   String webhook;
   String mail;
@@ -77,14 +83,14 @@ class Profile {
     this.mail = '';
   }
 
-
+  // get all profiles list
   static Future<List<Profile>> getAllProfiles() async {
     String data = await Globals.jsonFile.readData();
-    Map jsonData = data == '' ? {} : json.decode(data) ;
+    Map jsonData = data == '' ? {} : json.decode(data);
     List profiles = jsonData['profiles'] ?? [];
 
     List<Profile> result = [];
-    for (int i=0; i<profiles.length; i++) {
+    for (int i = 0; i < profiles.length; i++) {
       Profile p = Profile.fromJson(profiles[i]);
       result.add(p);
     }
@@ -92,6 +98,7 @@ class Profile {
     return result;
   }
 
+  // get profile by index
   static Future<Profile> getProfileByIndex(int idx) async {
     List<Profile> profiles = await getAllProfiles();
 
@@ -102,9 +109,10 @@ class Profile {
     }
   }
 
+  // create new profile with properties
   create() async {
     String data = await Globals.jsonFile.readData();
-    Map jsonData = data == '' ? {} : json.decode(data) ;
+    Map jsonData = data == '' ? {} : json.decode(data);
     List profiles = jsonData['profiles'] ?? [];
 
     if (profiles == null) {
@@ -118,9 +126,10 @@ class Profile {
     Globals.jsonFile.writeData(json.encode(jsonData));
   }
 
+  // update a existing profile
   update(int id) async {
     String data = await Globals.jsonFile.readData();
-    Map jsonData = data == '' ? {} : json.decode(data) ;
+    Map jsonData = data == '' ? {} : json.decode(data);
     List profiles = jsonData['profiles'] ?? [];
 
     if (profiles == null) {
@@ -136,9 +145,10 @@ class Profile {
     Globals.jsonFile.writeData(json.encode(jsonData));
   }
 
+  // delete a profile by index
   static Future deleteByIndex(int id) async {
     String data = await Globals.jsonFile.readData();
-    Map jsonData = data == '' ? {} : json.decode(data) ;
+    Map jsonData = data == '' ? {} : json.decode(data);
     List profiles = jsonData['profiles'] ?? [];
 
     if (profiles == null || profiles.length == 0) {
@@ -151,6 +161,7 @@ class Profile {
     return Globals.jsonFile.writeData(json.encode(jsonData));
   }
 
+  // get profile from JSON data
   Profile.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         remark = json['remark'],
@@ -166,6 +177,7 @@ class Profile {
         webhook = json['webhook'],
         mail = json['mail'];
 
+  // get JSON data from profile
   Map<String, dynamic> toJson() {
     return {
       'name': name,

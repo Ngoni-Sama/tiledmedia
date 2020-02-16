@@ -8,13 +8,14 @@ class Setting {
   String apiAuthToken = '';
   String xAPIKey = '';
 
+  // get setting instance with settings
   static Future<Setting> getInstance() async {
     if (_setting != null) {
       return _setting;
     }
 
     String data = await Globals.jsonFile.readData();
-    Map jsonData = data == '' ? {} : json.decode(data) ;
+    Map jsonData = data == '' ? {} : json.decode(data);
     Map setting = jsonData['setting'] ?? {};
 
     _setting = new Setting();
@@ -24,17 +25,19 @@ class Setting {
     return _setting;
   }
 
+  // check if settings were already configured
   isConfigured() {
     return customerID != null && apiAuthToken != '' && xAPIKey != '';
   }
 
+  // save settings with properties
   saveSetting(int customerID, String apiAuthToken, String xAPIKey) async {
     this.customerID = customerID;
     this.apiAuthToken = apiAuthToken;
     this.xAPIKey = xAPIKey;
 
     String data = await Globals.jsonFile.readData();
-    Map jsonData = data == '' ? {} : json.decode(data) ;
+    Map jsonData = data == '' ? {} : json.decode(data);
     Map setting = jsonData['setting'] ?? {};
 
     setting['customerID'] = customerID;

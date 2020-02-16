@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 class JsonFile {
-
   static JsonFile _jsonFile;
 
   static JsonFile getInstance() {

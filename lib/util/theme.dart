@@ -9,7 +9,6 @@ ThemeData appTheme() {
 }
 
 class AppColors {
-
   static const primaryColor = Color(0xFFf50057);
   static const defaultColor = Color(0xFF757575);
   static const secondaryColor = Color(0xFFab47bc);
@@ -17,7 +16,6 @@ class AppColors {
 }
 
 class AppStyles {
-
   static const defaultTextStyle = TextStyle(color: Color(0xffffffff));
   static const boldTextStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
 
