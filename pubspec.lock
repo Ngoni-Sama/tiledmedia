@@ -126,7 +126,7 @@ packages:
   path_provider_fde:
     dependency: "direct main"
     description:
-      path: "plugins/flutter_plugins/path_provider_fde"
+      path: "../plugins/flutter_plugins/path_provider_fde"
       relative: true
     source: path
     version: "0.0.1"

@@ -27,7 +27,7 @@ dependencies:
   path_provider: ^1.5.1
   path_provider_macos: ^0.0.2 # This can be removed once endorsed.
   path_provider_fde:
-    path: plugins/flutter_plugins/path_provider_fde
+    path: ../plugins/flutter_plugins/path_provider_fde
 
 dev_dependencies:
   flutter_test:
