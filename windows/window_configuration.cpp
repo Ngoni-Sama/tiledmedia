@@ -14,7 +14,7 @@
 
 #include "window_configuration.h"
 
-const wchar_t *kFlutterWindowTitle = L"Testbed";
+const wchar_t *kFlutterWindowTitle = L"TiledMedia";
 const unsigned int kFlutterWindowOriginX = 10;
 const unsigned int kFlutterWindowOriginY = 10;
 const unsigned int kFlutterWindowWidth = 800;
