@@ -325,10 +325,12 @@ class _StepScheduleState extends State<StepSchedule> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  new PrimaryButton(
-                    onPressed: onPrev,
-                    buttonName: 'Back',
-                  ),
+                  encodeUUID == null
+                      ? new PrimaryButton(
+                          onPressed: onPrev,
+                          buttonName: 'Back',
+                        )
+                      : Container(),
                   encodeUUID == null
                       ? new PrimaryButton(
                           onPressed: onSubmit,
